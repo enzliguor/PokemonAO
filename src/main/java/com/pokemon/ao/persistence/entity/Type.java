@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "type")
-public class Type {
+public class Type  implements EntityDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

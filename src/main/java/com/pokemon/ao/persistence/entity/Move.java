@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "move")
-public class Move {
+public class Move implements EntityDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

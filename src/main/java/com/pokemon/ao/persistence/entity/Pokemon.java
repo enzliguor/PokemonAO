@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Table(name = "pokemon")
-public class Pokemon {
+public class Pokemon implements EntityDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

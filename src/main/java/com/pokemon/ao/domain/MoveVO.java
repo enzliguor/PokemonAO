@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MoveVO {
+public class MoveVO implements ValueObject{
     private Long id;
     private String name;
     private TypeVO type;

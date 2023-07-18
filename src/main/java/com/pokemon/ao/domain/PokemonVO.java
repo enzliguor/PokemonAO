@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Getter
 @AllArgsConstructor
-public class PokemonVO {
+public class PokemonVO implements ValueObject{
     private Long id;
     private String name;
     private String sprite;

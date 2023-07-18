@@ -1,11 +1,11 @@
 package com.pokemon.ao.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-public class TypeVO {
+@AllArgsConstructor
+public class TypeVO implements ValueObject {
     private Long id;
     private String name;
     private String icon;

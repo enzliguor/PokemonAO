@@ -2,17 +2,17 @@ package com.pokemon.ao.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
-public class PokemonVO {
+public class PokemonVO implements ValueObject{
     private Long id;
     private String name;
     private String sprite;
     private int currentHp;
     private int maxHp;
-    private List<MoveVO> moves;
+    private TypeVO type;
+    private Set<MoveVO> moves;
     private String originalTrainer;
 }

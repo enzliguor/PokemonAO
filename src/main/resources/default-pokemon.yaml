@@ -1,0 +1,17 @@
+default.pokemon.id=0
+default.pokemon.name=squirtle
+default.pokemon.sprite=https://placeholder:8080/sprite0.jpg
+default.pokemon.current_hp=100
+default.pokemon.max_hp=100
+default.pokemon.type_id=0
+default.pokemon.move_id=0 
+default.pokemon.original_trainer=default
+
+default.type.id=0
+default.type.name=acqua
+default.type.icon=https://placeholder:8080/acqua.png
+
+default.move.id=0
+default.move.name=idropompa
+default.move.type_id=0
+default.move.power=10

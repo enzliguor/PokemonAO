@@ -6,6 +6,7 @@ import com.pokemon.ao.domain.TypeVO;
 import com.pokemon.ao.persistence.entity.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 

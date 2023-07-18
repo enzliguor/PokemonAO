@@ -1,4 +1,4 @@
-package com.pokemon.ao.persistence.entity.dao;
+package com.pokemon.ao.persistence.dao;
 
 
 import com.pokemon.ao.persistence.entity.Move;

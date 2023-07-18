@@ -18,7 +18,7 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
         this.dao = dao;
     }
 
-    protected E save(V v){
+    public E save(V v){
         if(v == null){
             return null;
         }
@@ -27,7 +27,7 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
         return this.dao.save(e);
     }
 
-    protected V findById(ID id){
+    public V findById(ID id){
         if(id == null){
             return null;
         }
@@ -35,7 +35,7 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
         return e.map(this.marshaller::unmarshall).orElse(null);
     }
 
-    protected void delete(ID id){
+    public void delete(ID id){
         if(id == null){
             return;
         }

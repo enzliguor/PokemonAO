@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -39,7 +40,7 @@ public class Pokemon {
             joinColumns = @JoinColumn(name = "pokemon_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id")
     )
-    private List <Move> moves;
+    private Set<Move> moves;
 
     @Column(name = "original_trainer")
     private String originalTrainer;

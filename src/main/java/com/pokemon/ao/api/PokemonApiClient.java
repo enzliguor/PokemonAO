@@ -16,9 +16,14 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PokemonApiClient {
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    private PokemonApiClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     private static final String ERROR_MESSAGE = "Errore nella richiesta: {}";
 
     public PokemonVO getPokemon(Long pokemonID) {

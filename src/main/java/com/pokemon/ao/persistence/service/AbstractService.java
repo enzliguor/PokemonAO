@@ -7,13 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public abstract class AbstractService<V extends ValueObject, E extends EntityDB, ID> {
 
-    private final Marshaller<V, E> marshaller;
+    protected final Marshaller<V, E> marshaller;
 
-    private final JpaRepository<E, ID> dao;
+    protected final JpaRepository<E, ID> dao;
 
     protected AbstractService(Marshaller<V, E> marshaller, JpaRepository<E, ID> dao) {
         this.marshaller = marshaller;

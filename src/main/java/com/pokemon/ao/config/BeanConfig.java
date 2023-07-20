@@ -1,4 +1,4 @@
-package com.pokemon.ao.configuration;
+package com.pokemon.ao.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

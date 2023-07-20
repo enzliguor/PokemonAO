@@ -5,15 +5,14 @@ import com.pokemon.ao.domain.PokemonVO;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -31,7 +30,7 @@ public class PokemonApiClient {
                 String name = (String) jsonResponse.get("name");
                 int baseExperience = (int) jsonResponse.get("base_experience");
                 String frontDefault = getFrontDefaultSprite((Map) jsonResponse.get("sprites"));
-                Set<MoveVO> moves = getMoves(name, 4);
+                Set<MoveVO> moves = getMoves((List) jsonResponse.get("moves"), 4);
                 return new PokemonVO(pokemonID, name, frontDefault, baseExperience, baseExperience, null, moves, "Ash");
             } else {
                 log.error(ERROR_MESSAGE, response.getStatusCode());
@@ -50,29 +49,14 @@ public class PokemonApiClient {
                 .get("front_default");
     }
 
-    public Set<MoveVO> getMoves(String pokemonName, int movesNumber) {
-        Set<MoveVO> moves = new HashSet<>();
-        try {
-            ResponseEntity<Map> response = restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/{name}", Map.class, pokemonName);
-            Map<String, Object> jsonResponse = response.getBody();
-            if(jsonResponse == null) return new HashSet<>();
-            if (response.getStatusCode().is2xxSuccessful()) {
-                List<Map<String, Object>> allMoves = (List) jsonResponse.get("moves");
-                for (int i = 0; i < Math.min(allMoves.size(), movesNumber); i++) {
-                    Map<String, Object> moveObject = allMoves.get(i);
-                    Map<String, String> moveMap = (Map) moveObject.get("move");
-                    String moveName = moveMap.get("name");
-                    MoveVO moveVO = getMoveByName(moveName);
-                    moves.add(moveVO);
-                }
-            } else {
-                log.error(ERROR_MESSAGE, response.getStatusCode());
-            }
-
-        } catch (Exception e) {
-            log.error(ERROR_MESSAGE, e.getMessage());
-        }
-        return moves;
+    private Set<MoveVO> getMoves(List<Map<String, Object>> moves, int movesNumber) {
+        return moves.stream()
+                .limit(movesNumber)
+                .map(moveObject -> (Map<String, String>) moveObject.get("move"))
+                .map(moveMap -> moveMap.get("name"))
+                .map(this::getMoveByName)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     public MoveVO getMoveByName(String moveName) {

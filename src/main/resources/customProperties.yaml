@@ -1,3 +1,4 @@
+#Default pokemon
 pokemon:
   id: 0
   name: 'squirtle'
@@ -17,3 +18,27 @@ pokemon:
         icon: 'https://placeholder:8080/acqua.png'
       power: 10
   originalTrainer: 'default'
+
+#Daje URL
+urlDaje: 'html://placeholder:8080'
+
+#Icons URLs
+icons:
+  ground: https://i.imgur.com/O3ZNXxT.png
+  poison: https://i.imgur.com/WerWKO0.png
+  fire: https://i.imgur.com/PIfsuGY.png
+  water: https://i.imgur.com/AITT6dU.png
+  electric: https://i.imgur.com/TKgE4D4.png
+  steel: https://i.imgur.com/NruyaNB.png
+  psychic: https://i.imgur.com/uiTpylA.png
+  normal: https://i.imgur.com/uEeFwee.png
+  ice: https://i.imgur.com/GicpTsp.png
+  grass: https://i.imgur.com/BtPM9xr.png
+  ghost: https://i.imgur.com/WTeLVDI.png
+  flying: https://i.imgur.com/wGG2U29.png
+  fighting: https://i.imgur.com/DWf4eX9.png
+  fairy: https://i.imgur.com/HVxHjkZ.png
+  dragon: https://i.imgur.com/8eCmLct.png
+  dark: https://i.imgur.com/La0v3eo.png
+  bug: https://i.imgur.com/2ngWiIE.png
+  rock: https://i.imgur.com/noI1DFh.png

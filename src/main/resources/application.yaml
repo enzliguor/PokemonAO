@@ -10,8 +10,3 @@ spring:
         dialect: 'org.hibernate.dialect.MySQLDialect'
     hibernate:
       ddl-auto: 'validate'
-
-#SERVIZI ESTERNI
-pokemon:
-  daje:
-    url: 'html://placeholder:8080'

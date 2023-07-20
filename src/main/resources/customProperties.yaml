@@ -1,0 +1,19 @@
+# POKEMON DI DEFAULT
+id: 0
+name: 'squirtle'
+sprite: 'https://placeholder:8080/sprite0.jpg'
+currentHp: 100
+maxHp: 100
+type:
+  id: 0
+  name: 'acqua'
+  icon: 'https://placeholder:8080/acqua.png'
+moves:
+  - id: 0
+    name: 'idropompa'
+    type:
+      id: 0
+      name: 'acqua'
+      icon: 'https://placeholder:8080/acqua.png'
+    power: 10
+originalTrainer: 'default'

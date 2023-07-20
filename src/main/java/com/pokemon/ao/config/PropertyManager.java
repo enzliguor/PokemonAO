@@ -29,4 +29,8 @@ public class PropertyManager {
         return customProperties.getPokemon();
     }
 
+    public String getIcon(String iconName){
+        return customProperties.getIcons().get(iconName);
+    }
+
 }

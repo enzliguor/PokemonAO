@@ -23,7 +23,6 @@ public class PropertyManager {
                 .getClassLoader()
                 .getResourceAsStream("customProperties.yaml"); //file of custom properties to convert
         customProperties = yaml.load(inputStream); //convert file yaml into a map of String-Object
-        System.out.println(customProperties);
     }
 
     public PokemonVO getDefaultPokemon(){

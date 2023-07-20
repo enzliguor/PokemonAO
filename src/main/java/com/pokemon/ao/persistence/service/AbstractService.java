@@ -5,7 +5,9 @@ import com.pokemon.ao.persistence.entity.EntityDB;
 import com.pokemon.ao.persistence.marshaller.Marshaller;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class AbstractService<V extends ValueObject, E extends EntityDB, ID> {
 
@@ -40,5 +42,10 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
             return;
         }
         this.dao.deleteById(id);
+    }
+
+    public List<V> findAll(){
+        List<E> e = this.dao.findAll();
+        return e.stream().map(this.marshaller::unmarshall).toList();
     }
 }

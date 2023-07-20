@@ -17,7 +17,6 @@ import java.util.Random;
 @Component
 public class PokemonUtility {
     private final PokemonService pokemonService;
-
     private final PropertyManager propertyManager;
 
     @Autowired
@@ -42,11 +41,10 @@ public class PokemonUtility {
                 idList.remove(n);
             }
         } else if(!idList.isEmpty()){
-            // TODO  prendere tutti i pokemon che abbiamo sul db
+            pokemonList = pokemonService.findAll();
         }else{
-            // TODO Creare il pokemon mockato da property e inserirlo nella lista
+            pokemonList.add(propertyManager.getDefaultPokemon());
         }
-
         return pokemonList;
     }
 }

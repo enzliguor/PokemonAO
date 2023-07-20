@@ -1,11 +1,12 @@
 package com.pokemon.ao.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
+
 import java.util.Set;
 
-@Getter
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class PokemonVO implements ValueObject{
     private Long id;
     private String name;

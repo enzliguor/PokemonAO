@@ -13,7 +13,6 @@ import lombok.Setter;
 public class Move implements EntityDB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")

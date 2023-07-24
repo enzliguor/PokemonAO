@@ -3,8 +3,11 @@ package com.pokemon.ao.utility;
 import com.pokemon.ao.api.PokemonApiClient;
 import com.pokemon.ao.config.PropertyManager;
 import com.pokemon.ao.domain.TypeVO;
+import com.pokemon.ao.dto.MoveDTO;
 import com.pokemon.ao.dto.SpeciesDTO;
+import com.pokemon.ao.dto.converter.MoveConverterDTO;
 import com.pokemon.ao.dto.converter.SpeciesConverterDTO;
+import com.pokemon.ao.persistence.service.MoveService;
 import com.pokemon.ao.persistence.service.SpeciesService;
 import com.pokemon.ao.persistence.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -22,20 +26,25 @@ public class DataLoader implements ApplicationRunner {
     private final SpeciesService speciesService;
     private final TypeService typeService;
     private final SpeciesConverterDTO speciesConverterDTO;
+    private final MoveService moveService;
+    private final MoveConverterDTO moveConverterDTO;
 
     @Autowired
-    public DataLoader(PokemonApiClient pokemonApi, PropertyManager propertyManager, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO) {
+    public DataLoader(PokemonApiClient pokemonApi, PropertyManager propertyManager, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO) {
         this.pokemonApi = pokemonApi;
         this.propertyManager = propertyManager;
         this.speciesService = speciesService;
         this.typeService = typeService;
         this.speciesConverterDTO = speciesConverterDTO;
+        this.moveService = moveService;
+        this.moveConverterDTO = moveConverterDTO;
     }
 
     @Override
     public void run(ApplicationArguments args) {
         loadTypes();
         loadSpecies();
+        loadMoves();
     }
 
     public void loadTypes() {
@@ -59,4 +68,13 @@ public class DataLoader implements ApplicationRunner {
                 .forEach(this.speciesService::save);
     }
 
+    public void loadMoves(){
+        if(!this.moveService.findAll().isEmpty()) return;
+        int numberOfMoves = this.propertyManager.getMovesCount();
+        List<TypeVO> types = this.typeService.findAll();
+        Set<MoveDTO> moves = this.pokemonApi.getTypesMoves(types, numberOfMoves);
+        moves.stream()
+                .map(this.moveConverterDTO::convertFromDTOToVO)
+                .forEach(this.moveService::save);
+    }
 }

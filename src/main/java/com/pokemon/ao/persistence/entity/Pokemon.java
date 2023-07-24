@@ -20,7 +20,7 @@ public class Pokemon implements EntityDB {
     @Column(name = "name")
     private String name;
     @ManyToOne
-    @JoinColumn(name = "species")
+    @JoinColumn(name = "species_id")
     private Species species;
 
     @Column ( name = "current_hp")

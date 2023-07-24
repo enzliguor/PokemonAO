@@ -39,10 +39,14 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void loadTypes() {
+        if(!this.typeService.findAll().isEmpty()) return;
         Set<String> typeNames = propertyManager.getTypeNames();
-        for (String typeName: typeNames) {
+        for (String typeName : typeNames) {
             String typeIcon = propertyManager.getIcon(typeName);
-            typeService.save(new TypeVO(null, typeName, typeIcon));
+            typeService.save(TypeVO.builder()
+                    .name(typeName)
+                    .icon(typeIcon)
+                    .build());
         }
     }
 }

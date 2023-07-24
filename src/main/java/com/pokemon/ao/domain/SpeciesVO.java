@@ -8,7 +8,7 @@ import lombok.Getter;
 public class SpeciesVO implements ValueObject{
 
     private Long id;
-    private String sprite;
+    private String spriteUrl;
     private String name;
     private TypeVO type;
 }

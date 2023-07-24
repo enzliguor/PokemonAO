@@ -23,7 +23,7 @@ public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species>{
         Species species = new Species();
         species.setId(speciesVO.getId());
         species.setName(speciesVO.getName());
-        species.setSprite(speciesVO.getSprite());
+        species.setSpriteUrl(speciesVO.getSpriteUrl());
         species.setType((typeMarshaller.marshall(speciesVO.getType())));
         return species;
     }
@@ -32,7 +32,7 @@ public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species>{
     public SpeciesVO unmarshall(Species species) {
         Long id = species.getId();
         String name = species.getName();
-        String sprite = species.getSprite();
+        String sprite = species.getSpriteUrl();
         TypeVO type = typeMarshaller.unmarshall(species.getType());
         return new SpeciesVO(id, name, sprite, type);
     }

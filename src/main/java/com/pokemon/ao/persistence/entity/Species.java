@@ -14,8 +14,8 @@ public class Species implements EntityDB{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "sprite")
-    private String sprite;
+    @Column(name = "sprite_url")
+    private String spriteUrl;
     @Column(name = "name")
     private String name;
     @ManyToOne

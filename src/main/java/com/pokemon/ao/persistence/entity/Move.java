@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @Getter
 @EqualsAndHashCode
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "move")
 public class Move implements EntityDB {

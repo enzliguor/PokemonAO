@@ -8,7 +8,7 @@ import java.util.Set;
 @Builder
 @Getter
 @EqualsAndHashCode
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "pokemon")
 public class Pokemon implements EntityDB {

@@ -31,8 +31,8 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         loadTypes();
-        int limit = 50;
-        for (long i = 0; i < limit; i++) {
+        int limit = propertyManager.getSpeciesCount();
+        for (int i = 1; i <= limit; i++) {
             PokemonVO pokemonVO = this.pokemonApi.getPokemon(i);
             this.pokemonService.save(pokemonVO);
         }

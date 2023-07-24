@@ -8,7 +8,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PokemonVO implements ValueObject{
-    private Long id;
+    private Integer id;
     private String name;
     private SpeciesVO speciesVO;
     private int currentHp;

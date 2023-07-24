@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeVO implements ValueObject {
-    private Long id;
+    private Integer id;
     private String name;
     private String icon;
 }

@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SpeciesVO implements ValueObject{
 
-    private Long id;
+    private Integer id;
     private String spriteUrl;
     private String name;
     private TypeVO type;

@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MoveVO implements ValueObject{
-    private Long id;
+    private Integer id;
     private String name;
     private TypeVO type;
     private int power;

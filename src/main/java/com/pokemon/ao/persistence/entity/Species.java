@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Species implements EntityDB{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "sprite_url")
     private String spriteUrl;
     @Column(name = "name")

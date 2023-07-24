@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Move implements EntityDB {
 
     @Id
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;

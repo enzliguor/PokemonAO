@@ -38,7 +38,7 @@ public class PokemonConverterDTO implements ConverterDTO<PokemonDTO, PokemonVO> 
 
     @Override
     public PokemonDTO convertFromVOToDTO(PokemonVO pokemonVO){
-       Integer speciesId = pokemonVO.getSpeciesVO().getId();
+       Integer speciesId = pokemonVO.getSpecies().getId();
        String name = pokemonVO.getName();
        int currentHp = pokemonVO.getCurrentHp();
        int maxHp = pokemonVO.getMaxHp ();

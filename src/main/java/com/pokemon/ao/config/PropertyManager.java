@@ -6,6 +6,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.InputStream;
+import java.util.Set;
 
 @Configuration
 public class PropertyManager {
@@ -33,4 +34,15 @@ public class PropertyManager {
         return customProperties.getIcons().get(iconName);
     }
 
+    public Set<String> getTypeNames() {
+        return customProperties.getIcons().keySet();
+    }
+
+    public Integer getSpeciesCount(){
+        return customProperties.getSpeciesCount();
+    }
+
+    public String getPokeApiUrl(){
+        return customProperties.getPokeApiUrl();
+    }
 }

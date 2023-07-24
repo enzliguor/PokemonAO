@@ -15,4 +15,8 @@ public class CustomProperties {
     private String urlDaje;
 
     private Map<String, String> icons;
+
+    private Integer speciesCount;
+
+    private String pokeApiUrl;
 }

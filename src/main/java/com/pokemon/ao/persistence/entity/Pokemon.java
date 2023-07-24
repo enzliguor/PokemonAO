@@ -15,23 +15,19 @@ import java.util.Set;
 public class Pokemon implements EntityDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "sprite")
-    private String sprite;
+    @ManyToOne
+    @JoinColumn(name = "species_id")
+    private Species species;
 
     @Column ( name = "current_hp")
     private int currentHp;
 
     @Column (name = "max_hp")
     private int maxHp;
-
-    @ManyToOne
-    @JoinColumn (name = "type_id")
-    private Type type;
 
     @ManyToMany
     @JoinTable(

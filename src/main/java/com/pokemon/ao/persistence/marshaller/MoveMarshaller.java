@@ -28,7 +28,7 @@ public class MoveMarshaller implements Marshaller<MoveVO, Move> {
 
     @Override
     public MoveVO unmarshall(Move move) {
-        Long id = move.getId();
+        Integer id = move.getId();
         String name = move.getName();
         TypeVO type = typeMarshaller.unmarshall(move.getType());
         int power = move.getPower();

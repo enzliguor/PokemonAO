@@ -9,20 +9,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "move")
-public class Move implements EntityDB {
-
+@Table(name = "species")
+public class Species implements EntityDB{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    @Column(name = "sprite")
+    private String spriteUrl;
     @Column(name = "name")
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Type type;
-
-    @Column(name = "power")
-    private int power;
-
 }

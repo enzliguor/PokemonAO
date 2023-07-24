@@ -8,17 +8,19 @@ import org.springframework.stereotype.Component;
 public class TypeMarshaller implements Marshaller<TypeVO, Type> {
     @Override
     public Type marshall(TypeVO typeVO) {
-        Type type = new Type();
-        type.setId(typeVO.getId());
-        type.setName(typeVO.getName());
-        type.setIcon(typeVO.getIcon());
-        return type;
+        return Type.builder()
+                .id(typeVO.getId())
+                .name(typeVO.getName())
+                .icon(typeVO.getIcon())
+                .build();
     }
+
     @Override
     public TypeVO unmarshall(Type type) {
-        Long id = type.getId();
-        String name = type.getName();
-        String icon = type.getIcon();
-        return new TypeVO(id, name, icon);
+        return TypeVO.builder()
+                .id(type.getId())
+                .name(type.getName())
+                .icon(type.getIcon())
+                .build();
     }
 }

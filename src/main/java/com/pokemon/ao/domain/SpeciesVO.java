@@ -6,9 +6,9 @@ import lombok.*;
 @Builder
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MoveVO implements ValueObject {
+public class SpeciesVO implements ValueObject {
     private Integer id;
+    private String spriteUrl;
     private String name;
     private TypeVO type;
-    private int power;
 }

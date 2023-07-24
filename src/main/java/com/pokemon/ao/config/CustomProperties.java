@@ -15,4 +15,10 @@ public class CustomProperties {
     private String urlDaje;
 
     private Map<String, String> icons;
+
+    private Integer speciesCount;
+
+    private Integer movesCount;
+
+    private String pokeApiUrl;
 }

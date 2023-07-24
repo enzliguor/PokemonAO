@@ -1,14 +1,16 @@
-package com.pokemon.ao.domain;
+package com.pokemon.ao.dto;
 
 import lombok.*;
 
-@Getter
 @Builder
+@Getter
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MoveVO implements ValueObject {
-    private Integer id;
+public class MoveDTO implements DTO {
+
     private String name;
-    private TypeVO type;
+
     private int power;
+
+    private String typeName;
 }

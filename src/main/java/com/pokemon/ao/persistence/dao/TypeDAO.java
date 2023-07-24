@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TypeDAO extends JpaRepository<Type, Long> {
+public interface TypeDAO extends JpaRepository<Type, Integer> {
     public Optional<Type> findByName(String name);
 }

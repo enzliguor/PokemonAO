@@ -27,7 +27,7 @@ public class PokemonUtility {
 
     public List<PokemonVO> getRandomPokemons(int pokemonToRetrieve) throws NoSuchAlgorithmException {
         List<PokemonVO> pokemonList = new ArrayList<>();
-        List<Long> idList = pokemonService.findAllIds();
+        List<Integer> idList = pokemonService.findAllIds();
 
         if (pokemonToRetrieve < idList.size()) {
             Random rand = SecureRandom.getInstanceStrong();

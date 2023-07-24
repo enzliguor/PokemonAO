@@ -11,15 +11,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PokemonService extends AbstractService<PokemonVO, Pokemon, Long> {
-    private final PokemonDAO pokemonDAO;
+public class PokemonService extends AbstractService<PokemonVO, Pokemon, Integer> {
     @Autowired
-    protected PokemonService(Marshaller<PokemonVO, Pokemon> marshaller, JpaRepository<Pokemon, Long> dao, PokemonDAO pokemonDAO) {
+    protected PokemonService(Marshaller<PokemonVO, Pokemon> marshaller, JpaRepository<Pokemon, Integer> dao) {
         super(marshaller, dao);
-        this.pokemonDAO = pokemonDAO;
     }
 
-    public List<Long> findAllIds(){
+    public List<Integer> findAllIds(){
+        PokemonDAO pokemonDAO = (PokemonDAO) dao;
         return pokemonDAO.findAllIds();
     }
 }

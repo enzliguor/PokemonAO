@@ -1,18 +1,25 @@
-package com.pokemon.ao.domain;
+package com.pokemon.ao.dto;
 
 import lombok.*;
 import java.util.Set;
 
-@Getter
 @Builder
+@Getter
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class PokemonVO implements ValueObject {
-    private Integer id;
+public class PokemonDTO implements DTO {
+
+    private Integer speciesId;
+
     private String name;
-    private SpeciesVO species;
+
     private int currentHp;
+
     private int maxHp;
-    private Set<MoveVO> moves;
+
+    private Integer typeId;
+
+    private Set<Integer> movesIds;
+
     private String originalTrainer;
 }

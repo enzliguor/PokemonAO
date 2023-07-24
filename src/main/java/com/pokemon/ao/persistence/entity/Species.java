@@ -9,16 +9,16 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "type")
-public class Type  implements EntityDB {
-
+@Table(name = "species")
+public class Species implements EntityDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column (name = "name")
+    @Column(name = "sprite")
+    private String spriteUrl;
+    @Column(name = "name")
     private String name;
-
-    @Column(name = "icon")
-    private String icon;
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Type type;
 }

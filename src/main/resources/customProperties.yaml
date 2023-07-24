@@ -1,14 +1,17 @@
 #Default pokemon
 pokemon:
   id: 0
-  name: 'squirtle'
-  sprite: 'https://placeholder:8080/sprite0.jpg'
+  name: 'Gren'
+  species:
+    id: 0
+    spriteUrl: 'https://placeholder:8080/sprite'
+    name: 'Squirtle'
+    type:
+      id: 0
+      name: 'acqua'
+      icon: 'https://placeholder:8080/acqua.png'
   currentHp: 100
   maxHp: 100
-  type:
-    id: 0
-    name: 'acqua'
-    icon: 'https://placeholder:8080/acqua.png'
   moves:
     - id: 0
       name: 'idropompa'
@@ -42,3 +45,12 @@ icons:
   dark: https://i.imgur.com/La0v3eo.png
   bug: https://i.imgur.com/2ngWiIE.png
   rock: https://i.imgur.com/noI1DFh.png
+
+#Known species
+speciesCount: 151
+
+#Known moves
+movesCount: 161
+
+#PokeApi URL
+pokeApiUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'

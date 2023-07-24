@@ -1,51 +1,46 @@
 package com.pokemon.ao.persistence.marshaller;
 
-import com.pokemon.ao.domain.MoveVO;
 import com.pokemon.ao.domain.PokemonVO;
-import com.pokemon.ao.domain.TypeVO;
 import com.pokemon.ao.persistence.entity.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 public class PokemonMarshaller implements Marshaller<PokemonVO, Pokemon> {
 
     private final MoveMarshaller moveMarshaller;
-    private final TypeMarshaller typeMarshaller;
+    private final SpeciesMarshaller speciesMarshaller;
 
     @Autowired
-    private PokemonMarshaller(MoveMarshaller moveMarshaller, TypeMarshaller typeMarshaller) {
+    private PokemonMarshaller(MoveMarshaller moveMarshaller, SpeciesMarshaller speciesMarshaller) {
         this.moveMarshaller = moveMarshaller;
-        this.typeMarshaller = typeMarshaller;
+        this.speciesMarshaller = speciesMarshaller;
     }
 
     @Override
     public Pokemon marshall(PokemonVO pokemonVO) {
-        Pokemon pokemon = new Pokemon();
-        pokemon.setId(pokemonVO.getId());
-        pokemon.setName(pokemonVO.getName());
-        pokemon.setSprite(pokemonVO.getSprite());
-        pokemon.setCurrentHp(pokemonVO.getCurrentHp());
-        pokemon.setMaxHp(pokemonVO.getMaxHp());
-        pokemon.setType(typeMarshaller.marshall(pokemonVO.getType()));
-        pokemon.setMoves(pokemonVO.getMoves().stream().map(moveMarshaller::marshall).collect(Collectors.toSet()));
-        pokemon.setOriginalTrainer(pokemonVO.getOriginalTrainer());
-        return pokemon;
+        return Pokemon.builder()
+                .id(pokemonVO.getId())
+                .name(pokemonVO.getName())
+                .species(speciesMarshaller.marshall(pokemonVO.getSpecies()))
+                .currentHp(pokemonVO.getCurrentHp())
+                .maxHp(pokemonVO.getMaxHp())
+                .moves(pokemonVO.getMoves().stream().map(moveMarshaller::marshall).collect(Collectors.toSet()))
+                .originalTrainer(pokemonVO.getOriginalTrainer())
+                .build();
     }
 
     @Override
     public PokemonVO unmarshall(Pokemon pokemon) {
-        Long id = pokemon.getId();
-        String name = pokemon.getName();
-        String sprite = pokemon.getSprite();
-        int currentHp = pokemon.getCurrentHp();
-        int maxHp = pokemon.getMaxHp();
-        TypeVO type = typeMarshaller.unmarshall(pokemon.getType());
-        Set<MoveVO> moves = pokemon.getMoves().stream().map(moveMarshaller::unmarshall).collect(Collectors.toSet());
-        String originalTrainer = pokemon.getOriginalTrainer();
-        return new PokemonVO(id, name, sprite, currentHp, maxHp, type, moves, originalTrainer);
+       return PokemonVO.builder()
+               .id(pokemon.getId())
+               .name(pokemon.getName())
+               .species(speciesMarshaller.unmarshall(pokemon.getSpecies()))
+               .currentHp(pokemon.getCurrentHp())
+               .maxHp(pokemon.getMaxHp())
+               .moves(pokemon.getMoves().stream().map(moveMarshaller::unmarshall).collect(Collectors.toSet()))
+               .originalTrainer(pokemon.getOriginalTrainer())
+               .build();
     }
 }

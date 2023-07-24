@@ -2,9 +2,10 @@ package com.pokemon.ao.utility;
 
 import com.pokemon.ao.api.PokemonApiClient;
 import com.pokemon.ao.config.PropertyManager;
-import com.pokemon.ao.domain.PokemonVO;
 import com.pokemon.ao.domain.TypeVO;
-import com.pokemon.ao.persistence.service.PokemonService;
+import com.pokemon.ao.dto.SpeciesDTO;
+import com.pokemon.ao.dto.converter.SpeciesConverterDTO;
+import com.pokemon.ao.persistence.service.SpeciesService;
 import com.pokemon.ao.persistence.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -18,24 +19,23 @@ public class DataLoader implements ApplicationRunner {
 
     private final PokemonApiClient pokemonApi;
     private final PropertyManager propertyManager;
-    private final PokemonService pokemonService;
+    private final SpeciesService speciesService;
     private final TypeService typeService;
+    private final SpeciesConverterDTO speciesConverterDTO;
+
     @Autowired
-    public DataLoader(PokemonApiClient pokemonApi, PropertyManager propertyManager, PokemonService pokemonService, TypeService typeService) {
+    public DataLoader(PokemonApiClient pokemonApi, PropertyManager propertyManager, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO) {
         this.pokemonApi = pokemonApi;
         this.propertyManager = propertyManager;
-        this.pokemonService = pokemonService;
+        this.speciesService = speciesService;
         this.typeService = typeService;
+        this.speciesConverterDTO = speciesConverterDTO;
     }
 
     @Override
     public void run(ApplicationArguments args) {
         loadTypes();
-        int limit = propertyManager.getSpeciesCount();
-        for (int i = 1; i <= limit; i++) {
-            PokemonVO pokemonVO = this.pokemonApi.getPokemon(i);
-            this.pokemonService.save(pokemonVO);
-        }
+        loadSpecies();
     }
 
     public void loadTypes() {
@@ -49,4 +49,14 @@ public class DataLoader implements ApplicationRunner {
                     .build());
         }
     }
+
+    public void loadSpecies() {
+        if(!this.speciesService.findAll().isEmpty()) return;
+        int numberOfSpecies = this.propertyManager.getSpeciesCount();
+        Set<SpeciesDTO> species = this.pokemonApi.getSpecies(numberOfSpecies);
+        species.stream()
+                .map(this.speciesConverterDTO::convertFromDTOToVO)
+                .forEach(this.speciesService::save);
+    }
+
 }

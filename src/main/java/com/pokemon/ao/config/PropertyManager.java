@@ -38,4 +38,11 @@ public class PropertyManager {
         return customProperties.getIcons().keySet();
     }
 
+    public Integer getSpeciesCount(){
+        return customProperties.getSpeciesCount();
+    }
+
+    public String getPokeApiUrl(){
+        return customProperties.getPokeApiUrl();
+    }
 }

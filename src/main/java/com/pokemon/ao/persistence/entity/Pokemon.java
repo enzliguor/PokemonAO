@@ -19,19 +19,15 @@ public class Pokemon implements EntityDB {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "sprite")
-    private String sprite;
+    @ManyToOne
+    @JoinColumn(name = "species")
+    private Species species;
 
     @Column ( name = "current_hp")
     private int currentHp;
 
     @Column (name = "max_hp")
     private int maxHp;
-
-    @ManyToOne
-    @JoinColumn (name = "type_id")
-    private Type type;
 
     @ManyToMany
     @JoinTable(

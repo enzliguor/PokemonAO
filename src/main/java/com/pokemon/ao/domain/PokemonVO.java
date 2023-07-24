@@ -10,10 +10,9 @@ import java.util.Set;
 public class PokemonVO implements ValueObject{
     private Long id;
     private String name;
-    private String sprite;
+    private SpeciesVO speciesVO;
     private int currentHp;
     private int maxHp;
-    private TypeVO type;
     private Set<MoveVO> moves;
     private String originalTrainer;
 }

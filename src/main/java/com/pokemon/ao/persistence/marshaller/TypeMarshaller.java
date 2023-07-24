@@ -16,7 +16,7 @@ public class TypeMarshaller implements Marshaller<TypeVO, Type> {
     }
     @Override
     public TypeVO unmarshall(Type type) {
-        Long id = type.getId();
+        Integer id = type.getId();
         String name = type.getName();
         String icon = type.getIcon();
         return new TypeVO(id, name, icon);

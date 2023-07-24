@@ -30,7 +30,7 @@ public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species>{
 
     @Override
     public SpeciesVO unmarshall(Species species) {
-        Long id = species.getId();
+        Integer id = species.getId();
         String name = species.getName();
         String sprite = species.getSpriteUrl();
         TypeVO type = typeMarshaller.unmarshall(species.getType());

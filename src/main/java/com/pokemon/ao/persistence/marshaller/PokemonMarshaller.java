@@ -27,7 +27,7 @@ public class PokemonMarshaller implements Marshaller<PokemonVO, Pokemon> {
         Pokemon pokemon = new Pokemon();
         pokemon.setId(pokemonVO.getId());
         pokemon.setName(pokemonVO.getName());
-        pokemon.setSpecies(speciesMarshaller.marshall(pokemonVO.getSpeciesVO()));
+        pokemon.setSpecies(speciesMarshaller.marshall(pokemonVO.getSpecies()));
         pokemon.setCurrentHp(pokemonVO.getCurrentHp());
         pokemon.setMaxHp(pokemonVO.getMaxHp());
         pokemon.setMoves(pokemonVO.getMoves().stream().map(moveMarshaller::marshall).collect(Collectors.toSet()));
@@ -37,7 +37,7 @@ public class PokemonMarshaller implements Marshaller<PokemonVO, Pokemon> {
 
     @Override
     public PokemonVO unmarshall(Pokemon pokemon) {
-        Long id = pokemon.getId();
+        Integer id = pokemon.getId();
         String name = pokemon.getName();
         SpeciesVO species = speciesMarshaller.unmarshall(pokemon.getSpecies());
         int currentHp = pokemon.getCurrentHp();

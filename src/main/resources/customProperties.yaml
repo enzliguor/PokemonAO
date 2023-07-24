@@ -49,5 +49,8 @@ icons:
 #Known species
 speciesCount: 151
 
+#Known moves
+movesCount: 161
+
 #PokeApi URL
 pokeApiUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'

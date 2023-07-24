@@ -17,7 +17,6 @@ public class PropertyManager {
         retrieveProperty();
     }
 
-    // TODO: esternalizzare path property
     private void retrieveProperty(){
         Yaml yaml = new Yaml(new Constructor(CustomProperties.class));
         InputStream inputStream = this.getClass()
@@ -44,5 +43,9 @@ public class PropertyManager {
 
     public String getPokeApiUrl(){
         return customProperties.getPokeApiUrl();
+    }
+
+    public int getMovesCount() {
+        return customProperties.getMovesCount();
     }
 }

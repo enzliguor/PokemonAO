@@ -1,14 +1,13 @@
 package com.pokemon.ao.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 import java.util.Set;
 
+@Builder
 @Getter
-@AllArgsConstructor
 @EqualsAndHashCode
-public class PokemonDTO implements DTO{
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class PokemonDTO implements DTO {
 
     private Integer speciesId;
 

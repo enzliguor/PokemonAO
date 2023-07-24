@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MoveService extends AbstractService<MoveVO, Move, Long> {
+public class MoveService extends AbstractService<MoveVO, Move, Integer> {
     @Autowired
-    protected MoveService(Marshaller<MoveVO, Move> marshaller, JpaRepository<Move, Long> dao) {
+    protected MoveService(Marshaller<MoveVO, Move> marshaller, JpaRepository<Move, Integer> dao) {
         super(marshaller, dao);
     }
 }

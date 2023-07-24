@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TypeService extends AbstractService<TypeVO, Type, Long>{
+public class TypeService extends AbstractService<TypeVO, Type, Integer>{
     @Autowired
-    protected TypeService(Marshaller<TypeVO, Type> marshaller, JpaRepository<Type, Long> dao) {
+    protected TypeService(Marshaller<TypeVO, Type> marshaller, JpaRepository<Type, Integer> dao) {
         super(marshaller, dao);
     }
 

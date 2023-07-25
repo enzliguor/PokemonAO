@@ -49,8 +49,12 @@ body {
  background: linear-gradient(80deg, #FFFF99, #FFCC66);
 }
 
+.grass-gradient-bg {
+ background: linear-gradient(80deg, #8ce98c, #3ebf3e);
+}
+
 .border-yellow {
- border-top: 4px solid #b8860b;
+ border-top: 4px solid #ffcb05;
 }
 
 #ads .card:hover {
@@ -61,52 +65,11 @@ body {
  z-index: 1;
 }
 
-#ads .card-image-overlay {
- font-size: 20px;
-
-}
-
-#ads .card-image-overlay span {
- display: inline-block;
-}
-
-
-#ads .ad-btn {
- text-transform: uppercase;
- width: 150px;
- height: 40px;
- border-radius: 80px;
- font-size: 16px;
- line-height: 35px;
- text-align: center;
- border: 3px solid #e6de08;
- display: block;
- text-decoration: none;
- margin: 20px auto 1px auto;
- color: #000;
- overflow: hidden;
- position: relative;
- background-color: #e6de08;
-}
-
-#ads .ad-btn:hover {
- background-color: #e6de08;
- color: #1e1717;
- border: 2px solid #e6de08;
- background: transparent;
- transition: all 0.3s ease;
- box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
-}
-
 #ads .ad-title h5 {
  text-transform: uppercase;
  font-size: 18px;
 }
 
-#pokemon-card{
- border-radius:2em;
-}
-
-#pokemon-trainer {
+.pokemon-trainer {
  font-size: 13px;
 }

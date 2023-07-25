@@ -14,4 +14,4 @@ spring:
 #Batch
 batch:
   databaseConnectionMonitor:
-    fixedDelay: 6000
+    fixedDelay: 60000

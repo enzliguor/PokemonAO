@@ -21,4 +21,6 @@ public class CustomProperties {
     private Integer movesCount;
 
     private String pokeApiUrl;
+
+    private int teamSize;
 }

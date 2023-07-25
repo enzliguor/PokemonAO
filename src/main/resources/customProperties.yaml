@@ -1,4 +1,3 @@
-#Default pokemon
 pokemon:
   id: 0
   name: 'Gren'
@@ -54,3 +53,6 @@ movesCount: 161
 
 #PokeApi URL
 pokeApiUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
+
+#Team random size
+teamSize: 6

@@ -48,4 +48,6 @@ public class PropertyManager {
     public int getMovesCount() {
         return customProperties.getMovesCount();
     }
+
+    public int getTeamSize(){ return customProperties.getTeamSize();}
 }

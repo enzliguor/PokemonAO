@@ -2,9 +2,10 @@ package com.pokemon.ao.domain;
 
 import lombok.*;
 
-@Getter
+
 @Builder
-@EqualsAndHashCode
+@Data
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class TypeVO implements ValueObject {
     private Integer id;

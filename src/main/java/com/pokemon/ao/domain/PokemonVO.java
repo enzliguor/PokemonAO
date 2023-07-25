@@ -3,9 +3,10 @@ package com.pokemon.ao.domain;
 import lombok.*;
 import java.util.Set;
 
-@Getter
+
 @Builder
-@EqualsAndHashCode
+@Data
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PokemonVO implements ValueObject {
     private Integer id;

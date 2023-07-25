@@ -97,7 +97,7 @@ public class PokemonApiClient {
         try {
             String constructedUrl = UriComponentsBuilder.fromUriString(url).buildAndExpand(urlVariables).toUriString();
             ResponseEntity<T> response = restTemplate.getForEntity(constructedUrl, responseType);
-            log.info("Invoking {}", url);
+            log.info("Calling {}", constructedUrl);
             if (response.getStatusCode().is2xxSuccessful()) {
                 return response.getBody();
             } else {

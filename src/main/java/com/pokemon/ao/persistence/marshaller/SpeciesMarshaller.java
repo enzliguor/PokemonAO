@@ -1,14 +1,12 @@
 package com.pokemon.ao.persistence.marshaller;
 
 import com.pokemon.ao.domain.SpeciesVO;
-import com.pokemon.ao.domain.TypeVO;
 import com.pokemon.ao.persistence.entity.Species;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species>{
+public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species> {
 
     private final TypeMarshaller typeMarshaller;
 
@@ -20,21 +18,22 @@ public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species>{
 
     @Override
     public Species marshall(SpeciesVO speciesVO) {
-        Species species = new Species();
-        species.setId(speciesVO.getId());
-        species.setName(speciesVO.getName());
-        species.setSpriteUrl(speciesVO.getSpriteUrl());
-        species.setType((typeMarshaller.marshall(speciesVO.getType())));
-        return species;
+        return Species.builder()
+                .id(speciesVO.getId())
+                .name(speciesVO.getName())
+                .spriteUrl(speciesVO.getSpriteUrl())
+                .type(typeMarshaller.marshall(speciesVO.getType()))
+                .build();
     }
 
     @Override
     public SpeciesVO unmarshall(Species species) {
-        Integer id = species.getId();
-        String name = species.getName();
-        String sprite = species.getSpriteUrl();
-        TypeVO type = typeMarshaller.unmarshall(species.getType());
-        return new SpeciesVO(id, name, sprite, type);
+       return SpeciesVO.builder()
+               .id(species.getId())
+               .name(species.getName())
+               .spriteUrl(species.getSpriteUrl())
+               .type(typeMarshaller.unmarshall(species.getType()))
+               .build();
     }
 
 }

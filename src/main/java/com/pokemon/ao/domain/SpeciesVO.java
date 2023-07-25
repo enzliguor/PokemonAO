@@ -1,15 +1,13 @@
 package com.pokemon.ao.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+
+@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class SpeciesVO implements ValueObject{
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class SpeciesVO implements ValueObject {
     private Integer id;
     private String spriteUrl;
     private String name;

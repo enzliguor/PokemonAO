@@ -1,13 +1,14 @@
 package com.pokemon.ao.domain;
 
 import lombok.*;
-
 import java.util.Set;
 
+
+@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class PokemonVO implements ValueObject{
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class PokemonVO implements ValueObject {
     private Integer id;
     private String name;
     private SpeciesVO species;

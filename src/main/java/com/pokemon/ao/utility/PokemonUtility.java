@@ -6,7 +6,6 @@ import com.pokemon.ao.persistence.service.PokemonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -25,24 +24,26 @@ public class PokemonUtility {
         this.propertyManager = defaultPokemon;
     }
 
-    public List<PokemonVO> getRandomPokemons(int pokemonToRetrieve) throws NoSuchAlgorithmException {
+    public List<PokemonVO> getRandomPokemons(int pokemonToRetrieve) {
         List<PokemonVO> pokemonList = new ArrayList<>();
         List<Integer> idList = pokemonService.findAllIds();
-
-        if (pokemonToRetrieve < idList.size()) {
-            Random rand = SecureRandom.getInstanceStrong();
-
-            while (pokemonList.size() < pokemonToRetrieve) {
-                int n = rand.nextInt(0, idList.size());
-
-                PokemonVO pokemon = pokemonService.findById(idList.get(n));
-
-                pokemonList.add(pokemon);
-                idList.remove(n);
+        try {
+            if (pokemonToRetrieve < idList.size()) {
+                Random rand = SecureRandom.getInstanceStrong();
+                while (pokemonList.size() < pokemonToRetrieve) {
+                    int n = rand.nextInt(idList.size());
+                    PokemonVO pokemon = pokemonService.findById(idList.get(n));
+                    pokemonList.add(pokemon);
+                    idList.remove(n);
+                }
+            }else if(!idList.isEmpty()){
+                pokemonList = pokemonService.findAll();
             }
-        } else if(!idList.isEmpty()){
-            pokemonList = pokemonService.findAll();
-        }else{
+            if(pokemonList.isEmpty()) {
+                pokemonList.add(propertyManager.getDefaultPokemon());
+            }
+        }catch(NoSuchAlgorithmException e) {
+            log.error("Error getting random Pokemon {}", e.getMessage ());
             pokemonList.add(propertyManager.getDefaultPokemon());
         }
         return pokemonList;

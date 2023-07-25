@@ -2,10 +2,12 @@ package com.pokemon.ao.domain;
 
 import lombok.*;
 
+
+@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class MoveVO implements ValueObject{
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class MoveVO implements ValueObject {
     private Integer id;
     private String name;
     private TypeVO type;

@@ -1,18 +1,19 @@
 package com.pokemon.ao.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
+@Builder
 @Getter
-@Setter
-@NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "move")
 public class Move implements EntityDB {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "name")
@@ -24,5 +25,6 @@ public class Move implements EntityDB {
 
     @Column(name = "power")
     private int power;
+
 
 }

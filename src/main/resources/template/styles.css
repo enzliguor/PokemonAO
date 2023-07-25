@@ -19,22 +19,13 @@ body {
  position: absolute;
  right: -10px;
  top: -20px;
- background: #ff4444;
  border-radius: 50%;
- text-align: center;
- color: #fff;
- font-size: 14px;
  width: 80px;
  height: 80px;
 }
 
-.card-image{
- max-height: 180px;
- overflow: hidden;
-}
-
-.ground-gradient-bg {
- background: linear-gradient(80deg, #8ce98c, #3ebf3e);
+.bug-gradient-bg {
+ background: linear-gradient(45deg, #004600, #15af15);
 }
 
 .fire-gradient-bg {
@@ -46,15 +37,15 @@ body {
 }
 
 .electric-gradient-bg {
- background: linear-gradient(80deg, #FFFF99, #FFCC66);
+ background: linear-gradient(180deg, #FFFF99, #FFCC66);
 }
 
 .grass-gradient-bg {
- background: linear-gradient(80deg, #8ce98c, #3ebf3e);
+ background: linear-gradient(45deg, #1ac21a, #b1eeb1);
 }
 
-.border-yellow {
- border-top: 4px solid #ffcb05;
+.gradient-bg {
+ background: linear-gradient(180deg, #ffffff, #fcd362);
 }
 
 #ads .card:hover {

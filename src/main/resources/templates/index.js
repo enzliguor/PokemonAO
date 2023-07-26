@@ -31,14 +31,12 @@ async function fetchRandomTeam() {
 
 function createMovesMarkup(moves) {
     return moves.map(move => `
-      <ul class="list-inline">
-          <div class="d-flex justify-content-between">
+      <ul class="list-inline px-4 d-flex justify-content-between">
               <li class="list-inline-item">
                   <img width="30px" height="30px" src="${move.type.icon}" alt="Alternate Text" />
               </li>
               <li class="list-inline-item">${move.name}</li>
               <li class="list-inline-item">${move.power}</li>
-          </div>
       </ul>
     `).join('');
 }
@@ -53,29 +51,25 @@ function createPokemonCards() {
         <!-- Category Card -->
         <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em">
           <div style="border-bottom: 5px solid #ffcb05">
-            <div class="pl-4">
-              <div class="d-flex justify-content-start px-3 pt-2 ad-title">
-                <h5 id="species-name" class="font-weight-bold">${pokemon.species.name}</h5>
-              </div>
-              <div class="d-flex justify-content-start px-3 ad-title">
+            <div class="px-5 pt-2 ad-titl">
+                <h5 id="species-name" class="font-weight-bold">${pokemon.species.name.toUpperCase()}</h5>
                 <h6 id="HP">${pokemon.currentHp}/${pokemon.maxHp} HP</h6>
-              </div>
             </div>
-            <img id="icon-type" class="img-fluid icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
+            <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
           </div>
-          <div class="card-image d-flex justify-content-center mt-3">
-            <img id="sprites" class="img-fluid grass-gradient-bg p-3" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
+          <div class="d-flex justify-content-center mt-3">
+            <img id="sprites" class="grass-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-2">
             <h5 id="pokemon-name">${pokemon.name}</h5>
           </div>
-          <div id="moves" class="card-body mt-2">
+          <div id="moves" class="card-body" style="height: 150px">
             <ul class="list-group">
               <!-- Ciclo for per creare dinamicamente le mosse del Pokémon -->
               ${createMovesMarkup(pokemon.moves)}
             </ul>
           </div>
-          <div class="px-2 d-flex justify-content-center pokemon-trainer">
+          <div class="d-flex justify-content-center pokemon-trainer">
             <p>${pokemon.originalTrainer}</p>
           </div>
         </div>   

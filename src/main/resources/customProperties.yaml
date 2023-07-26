@@ -23,7 +23,8 @@ pokemon:
   originalTrainer: 'default'
 
 #Daje URL
-urlDaje: 'html://placeholder:8080'
+urlPokemonDajeExchange: 'html://localhost:8080/api/pokemon/exchange'
+urlPokemonDajeStatusExchange: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
 
 #Icons URLs
 icons:

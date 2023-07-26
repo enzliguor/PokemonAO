@@ -5,6 +5,8 @@ import java.util.Set;
 
 @Getter
 @Builder
+@Setter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PokemonVO implements ValueObject {

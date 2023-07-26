@@ -4,6 +4,8 @@ import lombok.*;
 
 @Getter
 @Builder
+@Setter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class TypeVO implements ValueObject {

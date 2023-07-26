@@ -45,6 +45,7 @@ function createPokemonCards() {
     // Loop attraverso la squadra di Pokémon
     pokemonTeam.forEach((pokemon, index) => {
         const card = document.createElement('div');
+        const typeClass = getTypeClass(pokemon.species.type.name); // Funzione per ottenere la classe CSS del tipo
         card.className = 'col-md-4 mb-4';
 
         card.innerHTML = `
@@ -58,7 +59,7 @@ function createPokemonCards() {
             <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-3">
-            <img id="sprites" class="grass-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
+            <img id="sprites" class="${typeClass}" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-2">
             <h5 id="pokemon-name">${pokemon.name}</h5>
@@ -77,6 +78,51 @@ function createPokemonCards() {
 
         pokemonContainer.appendChild(card);
     });
+}
+
+// Funzione per ottenere la classe CSS in base al nome del tipo del Pokémon
+function getTypeClass(typeName) {
+    switch (typeName) {
+        case 'bug':
+            return 'bug-gradient-bg';
+        case 'poison':
+            return 'poison-gradient-bg';
+        case 'steel':
+            return 'steel-gradient-bg';
+        case 'fire':
+            return 'fire-gradient-bg';
+        case 'water':
+            return 'water-gradient-bg';
+        case 'electric':
+            return 'electric-gradient-bg';
+        case 'grass':
+            return 'grass-gradient-bg';
+        case 'psychic':
+            return 'psychic-gradient-bg';
+        case 'normal':
+            return 'normal-gradient-bg';
+        case 'ice':
+            return 'ice-gradient-bg';
+        case 'ghost':
+            return 'ghost-gradient-bg';
+        case 'flying':
+            return 'flying-gradient-bg';
+        case 'fighting':
+            return 'fighting-gradient-bg';
+        case 'fairy':
+            return 'fairy-gradient-bg';
+        case 'dragon':
+            return 'dragon-gradient-bg';
+        case 'dark':
+            return 'dark-gradient-bg';
+        case 'rock':
+            return 'rock-gradient-bg';
+        case 'ground':
+            return 'ground-gradient-bg';
+        // Aggiungi altri casi per gli altri tipi
+        default:
+            return 'gradient-bg';
+    }
 }
 
 pokeball.addEventListener('click', fetchRandomTeam);

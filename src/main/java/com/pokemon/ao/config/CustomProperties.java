@@ -17,6 +17,8 @@ public class CustomProperties {
     private Integer speciesCount;
 
     private Integer movesCount;
+  
+    private int teamSize;
 
     private String urlPokemonDajeExchange;
 
@@ -25,4 +27,5 @@ public class CustomProperties {
     private int maxMovesPerPokemon;
 
     private int minMovesPerPokemon;
+
 }

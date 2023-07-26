@@ -2,11 +2,10 @@ package com.pokemon.ao.domain;
 
 import lombok.*;
 
-@Getter
+
 @Builder
-@Setter
+@Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SpeciesVO implements ValueObject {
     private Integer id;

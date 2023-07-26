@@ -5,12 +5,12 @@ const pokemonContainer = document.getElementById('pokemon-container');
 let pokemonTeam;
 
 async function fetchRandomTeam() {
-    pokeball.src = 'Opened-pokeball.png';
-    document.body.style.backgroundImage = "url('flash.jpg')";
+    pokeball.src = '../static/images/index/Opened-pokeball.png';
+    document.body.style.backgroundImage = "url('../static/images/index/flash.jpg')";
     // Dopo 0,3 secondi, cambia lo sfondo e nasconde la pokeball e invoca l'api
     setTimeout( async function () {
         pokeball.style.display = 'none';
-        document.body.style.backgroundImage = "url('pokedex.jpg')"; // Ripristina lo sfondo predefinito
+        document.body.style.backgroundImage = "url('../static/images/index/pokedex.jpg')"; // Ripristina lo sfondo predefinito
 
         try {
             const response = await fetch('http://localhost:8080/api/pokemon/random-team');

@@ -41,13 +41,20 @@ public class PropertyManager {
         return customProperties.getSpeciesCount();
     }
 
-    public String getPokeApiUrl(){
-        return customProperties.getPokeApiUrl();
+    public String getUrlPokemonDajeExchange(){
+        return customProperties.getUrlPokemonDajeExchange();
     }
+
+    public String getUrlPokemonDajeStatusExchange(){ return customProperties.getUrlPokemonDajeStatusExchange();}
 
     public int getMovesCount() {
         return customProperties.getMovesCount();
     }
 
+    public int getMaxMovesPerPokemon (){ return customProperties.getMaxMovesPerPokemon();}
+
+    public int getMinMovesPerPokemon(){ return customProperties.getMinMovesPerPokemon();}
+
     public int getTeamSize(){ return customProperties.getTeamSize();}
+
 }

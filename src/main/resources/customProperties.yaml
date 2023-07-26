@@ -22,7 +22,8 @@ pokemon:
   originalTrainer: 'default'
 
 #Daje URL
-urlDaje: 'html://placeholder:8080'
+urlPokemonDajeExchange: 'html://localhost:8080/api/pokemon/exchange'
+urlPokemonDajeStatusExchange: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
 
 #Icons URLs
 icons:
@@ -54,5 +55,12 @@ movesCount: 161
 #PokeApi URL
 pokeApiUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
 
+#MaxMoves per Pokemon
+maxMovesPerPokemon: 4
+
+#MinMoves per Pokemon
+minMovesPerPokemon: 1
+
 #Team random size
 teamSize: 6
+

@@ -19,13 +19,13 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
         this.dao = dao;
     }
 
-    public E save(V v){
+    public V save(V v){
         if(v == null){
             return null;
         }
         E e = this.marshaller.marshall(v);
 
-        return this.dao.save(e);
+        return this.marshaller.unmarshall(this.dao.save(e));
     }
 
     public V findById(ID id){

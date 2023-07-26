@@ -21,4 +21,8 @@ public class CustomProperties {
     private Integer movesCount;
 
     private String pokeApiUrl;
+
+    private int maxMovesPerPokemon;
+
+    private int minMovesPerPokemon;
 }

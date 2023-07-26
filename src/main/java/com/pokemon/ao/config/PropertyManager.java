@@ -48,4 +48,8 @@ public class PropertyManager {
     public int getMovesCount() {
         return customProperties.getMovesCount();
     }
+
+    public int getMaxMovesPerPokemon (){ return customProperties.getMaxMovesPerPokemon();}
+
+    public int getMinMovesPerPokemon(){ return customProperties.getMinMovesPerPokemon();}
 }

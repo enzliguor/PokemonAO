@@ -12,15 +12,20 @@ import java.util.Map;
 public class CustomProperties {
     private PokemonVO pokemon;
 
-    private String urlDaje;
-
     private Map<String, String> icons;
 
     private Integer speciesCount;
 
     private Integer movesCount;
-
-    private String pokeApiUrl;
-
+  
     private int teamSize;
+
+    private String urlPokemonDajeExchange;
+
+    private String urlPokemonDajeStatusExchange;
+
+    private int maxMovesPerPokemon;
+
+    private int minMovesPerPokemon;
+
 }

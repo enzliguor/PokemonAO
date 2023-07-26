@@ -40,6 +40,7 @@ public class PokemonConverterDTO implements ConverterDTO<PokemonDTO, PokemonVO> 
                 .name(pokemonVO.getName())
                 .speciesId(pokemonVO.getSpecies().getId())
                 .currentHp(pokemonVO.getCurrentHp())
+                .typeId(pokemonVO.getSpecies().getType().getId())
                 .maxHp(pokemonVO.getMaxHp())
                 .movesIds(pokemonVO.getMoves().stream().map(MoveVO::getId).collect(Collectors.toSet()))
                 .originalTrainer(pokemonVO.getOriginalTrainer())

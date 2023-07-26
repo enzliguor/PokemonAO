@@ -19,7 +19,7 @@ public class MoveService extends AbstractService<MoveVO, Move, Integer> {
 
     public Set<MoveVO> mapMovesIdsToMoveVO(Set<Integer> movesId ) {
         return movesId.stream ()
-                .map(moveId -> this.findById(moveId))
+                .map(this::findById)
                 .collect(Collectors.toSet());
     }
 }

@@ -1,5 +1,6 @@
 package com.pokemon.ao.api;
 
+import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.domain.TypeVO;
 import com.pokemon.ao.dto.MoveDTO;
 import com.pokemon.ao.dto.SpeciesDTO;
@@ -22,15 +23,17 @@ import java.util.stream.IntStream;
 @Slf4j
 public class PokemonApiClient {
     private final RestTemplate restTemplate;
+    private final CustomProperties customProperties;
 
     @Autowired
-    private PokemonApiClient(RestTemplate restTemplate) {
+    private PokemonApiClient(RestTemplate restTemplate, CustomProperties customProperties) {
         this.restTemplate = restTemplate;
+        this.customProperties = customProperties;
     }
 
     public Set<SpeciesDTO> getSpecies(int numberOfSpecies) {
         return IntStream.rangeClosed(1, numberOfSpecies)
-                .mapToObj(speciesID -> invokeApi("https://pokeapi.co/api/v2/pokemon/{id}", Map.class, speciesID))
+                .mapToObj(speciesID -> invokeApi(customProperties.getPokemonApiSpeciesUrl(), Map.class, speciesID))
                 .filter(Objects::nonNull)
                 .map(jsonResponse -> SpeciesDTO.builder()
                         .name((String) jsonResponse.get("name"))
@@ -61,7 +64,7 @@ public class PokemonApiClient {
         int maxMovesPerType = (maxMoves + typeVO.size() - 1) / typeVO.size();
         return (Set<MoveDTO>) typeVO.stream()
                 .parallel()
-                .map(type -> invokeApi("https://pokeapi.co/api/v2/type/{name}", Map.class, type.getName()))
+                .map(type -> invokeApi(customProperties.getPokemonApiTypesUrl(), Map.class, type.getName()))
                 .filter(Objects::nonNull)
                 .flatMap(jsonResponse -> this.getMoves((List) jsonResponse.get("moves"), maxMovesPerType).stream())
                 .limit(maxMoves)
@@ -78,7 +81,7 @@ public class PokemonApiClient {
     }
 
     public MoveDTO getMoveByName(String moveName) {
-        Map<String, Object> jsonResponse = this.invokeApi("https://pokeapi.co/api/v2/move/{name}", Map.class, moveName);
+        Map<String, Object> jsonResponse = this.invokeApi(customProperties.getPokemonApiMovesUrl(), Map.class, moveName);
         if (jsonResponse == null) return null;
 
         Map<String, Object> typeObj = (Map<String, Object>) jsonResponse.get("type");

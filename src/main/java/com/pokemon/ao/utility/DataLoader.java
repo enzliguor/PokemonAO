@@ -1,7 +1,7 @@
 package com.pokemon.ao.utility;
 
 import com.pokemon.ao.api.PokemonApiClient;
-import com.pokemon.ao.config.PropertyManager;
+import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.domain.TypeVO;
 import com.pokemon.ao.dto.MoveDTO;
 import com.pokemon.ao.dto.SpeciesDTO;
@@ -16,13 +16,14 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Component
 public class DataLoader implements ApplicationRunner {
 
     private final PokemonApiClient pokemonApi;
-    private final PropertyManager propertyManager;
+    private final CustomProperties customProperties;
     private final SpeciesService speciesService;
     private final TypeService typeService;
     private final SpeciesConverterDTO speciesConverterDTO;
@@ -30,9 +31,9 @@ public class DataLoader implements ApplicationRunner {
     private final MoveConverterDTO moveConverterDTO;
 
     @Autowired
-    public DataLoader(PokemonApiClient pokemonApi, PropertyManager propertyManager, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO) {
+    public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO) {
         this.pokemonApi = pokemonApi;
-        this.propertyManager = propertyManager;
+        this.customProperties = customProperties;
         this.speciesService = speciesService;
         this.typeService = typeService;
         this.speciesConverterDTO = speciesConverterDTO;
@@ -49,19 +50,17 @@ public class DataLoader implements ApplicationRunner {
 
     public void loadTypes() {
         if(!this.typeService.findAll().isEmpty()) return;
-        Set<String> typeNames = propertyManager.getTypeNames();
-        for (String typeName : typeNames) {
-            String typeIcon = propertyManager.getIcon(typeName);
-            typeService.save(TypeVO.builder()
-                    .name(typeName)
-                    .icon(typeIcon)
-                    .build());
-        }
+        Map<String, String> typeIcons = this.customProperties.getTypeIcons();
+        typeIcons.forEach((key, value) -> this.typeService.save(TypeVO
+                        .builder()
+                        .name(key)
+                        .icon(value)
+                        .build()));
     }
 
     public void loadSpecies() {
         if(!this.speciesService.findAll().isEmpty()) return;
-        int numberOfSpecies = this.propertyManager.getSpeciesCount();
+        int numberOfSpecies = this.customProperties.getSpeciesCount();
         Set<SpeciesDTO> species = this.pokemonApi.getSpecies(numberOfSpecies);
         species.stream()
                 .map(this.speciesConverterDTO::convertFromDTOToVO)
@@ -70,7 +69,7 @@ public class DataLoader implements ApplicationRunner {
 
     public void loadMoves(){
         if(!this.moveService.findAll().isEmpty()) return;
-        int numberOfMoves = this.propertyManager.getMovesCount();
+        int numberOfMoves = this.customProperties.getMovesCount();
         List<TypeVO> types = this.typeService.findAll();
         Set<MoveDTO> moves = this.pokemonApi.getTypesMoves(types, numberOfMoves);
         moves.stream()

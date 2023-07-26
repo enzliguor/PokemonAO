@@ -1,7 +1,7 @@
 package com.pokemon.ao.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.pokemon.ao.config.PropertyManager;
+import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.domain.PokemonVO;
 import com.pokemon.ao.dto.PokemonDTO;
 import com.pokemon.ao.dto.converter.PokemonConverterDTO;
@@ -29,15 +29,15 @@ public class PokemonExchangeController {
     private final PokemonService pokemonService;
     private final PokemonConverterDTO pokemonConverterDTO;
     private final DTOValidator dtoValidator;
-    private final PropertyManager propertyManager;
+    private final CustomProperties customProperties;
 
     @Autowired
-    public PokemonExchangeController(RestTemplate restTemplate, PokemonService pokemonService, PokemonConverterDTO pokemonConverterDTO, DTOValidator dtoValidator, PropertyManager propertyManager) {
+    public PokemonExchangeController(RestTemplate restTemplate, PokemonService pokemonService, PokemonConverterDTO pokemonConverterDTO, DTOValidator dtoValidator, CustomProperties customProperties) {
         this.restTemplate = restTemplate;
         this.pokemonService = pokemonService;
         this.pokemonConverterDTO = pokemonConverterDTO;
         this.dtoValidator = dtoValidator;
-        this.propertyManager = propertyManager;
+        this.customProperties = customProperties;
     }
     @PostMapping("/exchange/{id}")
     public ResponseEntity<PokemonVO> exchangePokemon(@PathVariable Integer id) {
@@ -47,9 +47,9 @@ public class PokemonExchangeController {
         if (!this.dtoValidator.isValidPokemonDTO(pokemonToExchangeDTO)) {
             return ResponseEntity.badRequest().body(pokemonToExchange);
         }
-        String urlPokemonDajeExchange = this.propertyManager.getUrlPokemonDajeExchange();
+        String pokemonDajeExchangeUrl = this.customProperties.getPokemonDajeExchangeUrl();
 
-        ResponseEntity<ExchangeResponse> response = restTemplate.postForEntity(urlPokemonDajeExchange, pokemonToExchangeDTO, ExchangeResponse.class);
+        ResponseEntity<ExchangeResponse> response = restTemplate.postForEntity(pokemonDajeExchangeUrl, pokemonToExchangeDTO, ExchangeResponse.class);
         HttpStatusCode statusCode = response.getStatusCode();
         ExchangeResponse exchangeResponse = response.getBody();
 
@@ -86,8 +86,8 @@ public class PokemonExchangeController {
     }
 
     private ResponseEntity<HttpStatusCode> communicateStatusExchange(String exchangeID, StatusExchange statusExchange) {
-        String urlPokemonDajeStatusExchange = this.propertyManager.getUrlPokemonDajeStatusExchange();
-        String constructedUrl = UriComponentsBuilder.fromUriString(urlPokemonDajeStatusExchange).buildAndExpand(exchangeID).toUriString();
+        String pokemonDajeStatusExchangeUrl = this.customProperties.getPokemonDajeStatusExchangeUrl();
+        String constructedUrl = UriComponentsBuilder.fromUriString(pokemonDajeStatusExchangeUrl).buildAndExpand(exchangeID).toUriString();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 

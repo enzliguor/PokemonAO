@@ -1,6 +1,6 @@
 package com.pokemon.ao.dto.utility;
 
-import com.pokemon.ao.config.PropertyManager;
+import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.dto.PokemonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DTOValidator {
 
-    private final PropertyManager propertyManager;
+    private final CustomProperties customProperties;
 
     @Autowired
-    public DTOValidator(PropertyManager propertyManager) {
-        this.propertyManager = propertyManager;
+    public DTOValidator(CustomProperties customProperties) {
+        this.customProperties = customProperties;
     }
 
 
@@ -27,8 +27,8 @@ public class DTOValidator {
                 pokemonDTO.getMovesIds() == null ||
                 pokemonDTO.getOriginalTrainer() == null ||
                 pokemonDTO.getMovesIds().isEmpty() ||
-                pokemonDTO.getMovesIds().size() > propertyManager.getMaxMovesPerPokemon() ||
-                pokemonDTO.getMovesIds().size() < propertyManager.getMinMovesPerPokemon());
+                pokemonDTO.getMovesIds().size() > customProperties.getMaxMovesPerPokemon() ||
+                pokemonDTO.getMovesIds().size() < customProperties.getMinMovesPerPokemon());
     }
 
 }

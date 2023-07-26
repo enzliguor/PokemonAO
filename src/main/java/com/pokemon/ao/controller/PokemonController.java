@@ -1,6 +1,6 @@
 package com.pokemon.ao.controller;
 
-import com.pokemon.ao.config.PropertyManager;
+import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.domain.PokemonVO;
 import com.pokemon.ao.utility.PokemonUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class PokemonController {
     private final int teamSize;
 
     @Autowired
-    public PokemonController(PokemonUtility pokemonUtility, PropertyManager propertyManager) {
+    public PokemonController(PokemonUtility pokemonUtility, CustomProperties customProperties) {
         this.pokemonUtility = pokemonUtility;
-        this.teamSize = propertyManager.getTeamSize();
+        this.teamSize = customProperties.getTeamSize();
 
     }
 

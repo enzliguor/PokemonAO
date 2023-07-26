@@ -1,11 +1,12 @@
 package com.pokemon.ao.utility;
 
-import com.pokemon.ao.config.PropertyManager;
+import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.domain.PokemonVO;
 import com.pokemon.ao.persistence.service.PokemonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.Random;
 @Component
 public class PokemonUtility {
     private final PokemonService pokemonService;
-    private final PropertyManager propertyManager;
+    private final CustomProperties customProperties;
 
     @Autowired
-    public PokemonUtility(PokemonService pokemonService, PropertyManager defaultPokemon) {
+    public PokemonUtility(PokemonService pokemonService, CustomProperties defaultPokemon) {
         this.pokemonService = pokemonService;
-        this.propertyManager = defaultPokemon;
+        this.customProperties = defaultPokemon;
     }
 
     public List<PokemonVO> getRandomPokemons(int pokemonToRetrieve) {
@@ -40,11 +41,11 @@ public class PokemonUtility {
                 pokemonList = pokemonService.findAll();
             }
             if(pokemonList.isEmpty()) {
-                pokemonList.add(propertyManager.getDefaultPokemon());
+                pokemonList.add(customProperties.getDefaultPokemon());
             }
         }catch(NoSuchAlgorithmException e) {
             log.error("Error getting random Pokemon {}", e.getMessage ());
-            pokemonList.add(propertyManager.getDefaultPokemon());
+            pokemonList.add(customProperties.getDefaultPokemon());
         }
         return pokemonList;
     }

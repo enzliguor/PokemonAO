@@ -3,7 +3,7 @@
 
 body {
  font-family: 'Montserrat', sans-serif;
- background-image: url('pokemon-mystery-dungeon-squadra-soccorso-dx-recensione-cover-1620x800.jpg');
+ background-image: url('../static/images/index/pokemon-mystery-dungeon-squadra-soccorso-dx-recensione-cover-1620x800.jpg');
  background-size: cover;
  background-repeat: no-repeat;
 }

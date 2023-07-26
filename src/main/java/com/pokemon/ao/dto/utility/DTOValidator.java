@@ -17,18 +17,18 @@ public class DTOValidator {
     }
 
 
-   public boolean isValidatePokemonDTO(PokemonDTO pokemonDTO){
-        return !(pokemonDTO.getSpeciesId() == null ||
-        pokemonDTO.getName() == null ||
-        pokemonDTO.getCurrentHp() < 0 ||
-        pokemonDTO.getMaxHp() <= 0 ||
-        pokemonDTO.getTypeId() == null ||
-        pokemonDTO.getMovesIds() == null ||
-        pokemonDTO.getOriginalTrainer() == null||
-        pokemonDTO.getMovesIds().isEmpty()||
-        pokemonDTO.getMovesIds().size() > propertyManager.getMaxMovesPerPokemon()||
-        pokemonDTO.getMovesIds().size() < propertyManager.getMinMovesPerPokemon());
-
+    public boolean isValidPokemonDTO(PokemonDTO pokemonDTO) {
+        return !(pokemonDTO == null ||
+                pokemonDTO.getSpeciesId() == null ||
+                pokemonDTO.getName() == null ||
+                pokemonDTO.getCurrentHp() < 0 ||
+                pokemonDTO.getMaxHp() <= 0 ||
+                pokemonDTO.getTypeId() == null ||
+                pokemonDTO.getMovesIds() == null ||
+                pokemonDTO.getOriginalTrainer() == null ||
+                pokemonDTO.getMovesIds().isEmpty() ||
+                pokemonDTO.getMovesIds().size() > propertyManager.getMaxMovesPerPokemon() ||
+                pokemonDTO.getMovesIds().size() < propertyManager.getMinMovesPerPokemon());
     }
 
 }

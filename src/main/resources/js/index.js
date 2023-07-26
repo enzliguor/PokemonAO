@@ -35,8 +35,8 @@ function createMovesMarkup(moves) {
               <li class="list-inline-item">
                   <img width="30px" height="30px" src="${move.type.icon}" alt="Alternate Text" />
               </li>
-              <li class="list-inline-item">${move.name}</li>
-              <li class="list-inline-item">${move.power}</li>
+              <li class="list-inline-item move-font-size">${move.name}</li>
+              <li class="list-inline-item move-font-size">${move.power}</li>
       </ul>
     `).join('');
 }

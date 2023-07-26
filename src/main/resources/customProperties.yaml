@@ -1,4 +1,4 @@
-pokemon:
+defaultPokemon:
   id: 0
   name: 'Gren'
   species:
@@ -22,11 +22,16 @@ pokemon:
   originalTrainer: 'default'
 
 #Daje URL
-urlPokemonDajeExchange: 'html://localhost:8080/api/pokemon/exchange'
-urlPokemonDajeStatusExchange: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
+pokemonDajeExchangeUrl: 'html://localhost:8080/api/pokemon/exchange'
+pokemonDajeStatusExchangeUrl: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
+
+#API Pokemon.co
+pokemonApiSpeciesUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
+pokemonApiMovesUrl: 'https://pokeapi.co/api/v2/move/{name}'
+pokemonApiTypesUrl: 'https://pokeapi.co/api/v2/type/{name}'
 
 #Icons URLs
-icons:
+typeIcons:
   ground: https://i.imgur.com/O3ZNXxT.png
   poison: https://i.imgur.com/WerWKO0.png
   fire: https://i.imgur.com/PIfsuGY.png
@@ -51,9 +56,6 @@ speciesCount: 151
 
 #Known moves
 movesCount: 161
-
-#PokeApi URL
-pokeApiUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
 
 #MaxMoves per Pokemon
 maxMovesPerPokemon: 4

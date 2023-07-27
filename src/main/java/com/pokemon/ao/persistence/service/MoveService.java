@@ -28,7 +28,7 @@ public class MoveService extends AbstractService<MoveVO, Move, Integer> {
 
     public Map<MoveSlot, MoveVO> mapMovesIdsToMoveVO(Set<Integer> movesId ) {
         List<Integer> moves = new ArrayList<>(movesId);
-        return IntStream.range(0, MoveSlot.values().length)
+        return IntStream.range(0, movesId.size())
                 .boxed()
                 .collect(Collectors.toMap(
                         index -> MoveSlot.values()[index],

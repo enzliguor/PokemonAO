@@ -12,7 +12,8 @@ defaultPokemon:
   currentHp: 100
   maxHp: 100
   moves:
-    - id: 0
+    SLOT_1:
+      id: 0
       name: 'idropompa'
       type:
         id: 0

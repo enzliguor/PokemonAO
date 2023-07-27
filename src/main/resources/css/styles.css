@@ -8,6 +8,12 @@ body {
  background-repeat: no-repeat;
 }
 
+.trade-section {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: #ffcb05;
+    cursor: pointer;
+}
+
 .icon-type {
  position: absolute;
  right: -10px;

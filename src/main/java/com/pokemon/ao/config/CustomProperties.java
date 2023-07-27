@@ -23,5 +23,10 @@ public class CustomProperties {
     private String pokemonApiSpeciesUrl;
     private String pokemonApiMovesUrl;
     private String pokemonApiTypesUrl;
+    private Integer defaultMoveID;
+    private String unknownDataTypeScriptPath;
+    private Integer unknownSpeciesID;
+    private Integer unknownMoveID;
+    private Integer unknownTypeID;
 
 }

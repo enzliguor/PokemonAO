@@ -22,6 +22,21 @@ defaultPokemon:
       power: 10
   originalTrainer: 'default'
 
+#Unknown Data Type Script Path
+unknownDataTypeScriptPath: 'C:\Users\vliguori\Desktop\PokemonAO\utility\db\unknownDataType.sql'
+
+#Unknown Species ID:
+unknownSpeciesID: 10000
+
+#Unknown Move ID:
+unknownMoveID: 10000
+
+#Unknown Type ID:
+unknownTypeID: 10000
+
+#Default Move ID
+defaultMoveID: 1
+
 #Daje URL
 pokemonDajeExchangeUrl: 'html://localhost:8080/api/pokemon/exchange'
 pokemonDajeStatusExchangeUrl: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'

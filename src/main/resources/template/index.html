@@ -12,21 +12,32 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container mt-4">
-    <h1 class="text-center">
-        <img src="https://cdn.discordapp.com/attachments/1130876162403467354/1130880734689771530/11zon_cropped.png"
-             class="img-fluid" alt="Pokémon Image">
-    </h1>
-</div>
-
-<div class="container">
-        <div class="row my-md-4" id="pokemon-container">
-            <div class="col-md-12 text-center mt-5">
-                <img src="../static/images/index/Pokeball.png" id="pokeball" class="img-pokeball" alt="Pokeball Image">
+    <header>
+        <div id="header" class="container mt-4">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-around">
+                    <h1 class="text-center">
+                        <img src="https://cdn.discordapp.com/attachments/1130876162403467354/1130880734689771530/11zon_cropped.png"
+                             class="img-fluid" alt="Pokémon Image">
+                    </h1>
+                    <div id="trade-section" class="trade-section" style="display: none">
+                        <h4 class="text-right pr-5 mr-2">Click here to trade</h4>
+                        <img width="350px" src="../static/images/index/pokemon-trade-removebg-preview.png" alt="Trade button">
+                    </div>
+                </div>
             </div>
         </div>
-</div>
-<script src="../js/index.js"></script>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row my-md-4" id="pokemon-container">
+                <div class="col-md-12 text-center mt-5">
+                    <img src="../static/images/index/Pokeball.png" id="pokeball" class="img-pokeball" alt="Pokeball Image">
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>

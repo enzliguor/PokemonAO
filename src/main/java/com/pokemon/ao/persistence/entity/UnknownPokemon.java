@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@DiscriminatorValue(value = "entity_type")
+@DiscriminatorValue(value = "unknown_pokemon")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UnknownPokemon extends Pokemon {
 

@@ -47,4 +47,8 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
         List<E> e = this.dao.findAll();
         return e.stream().map(this.marshaller::unmarshall).toList();
     }
+
+    public boolean exists(ID id){
+        return this.dao.existsById(id);
+    }
 }

@@ -13,8 +13,14 @@ import com.pokemon.ao.persistence.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,9 +35,11 @@ public class DataLoader implements ApplicationRunner {
     private final SpeciesConverterDTO speciesConverterDTO;
     private final MoveService moveService;
     private final MoveConverterDTO moveConverterDTO;
+    private final JdbcTemplate jdbcTemplate;
+    private final ResourceLoader resourceLoader;
 
     @Autowired
-    public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO) {
+    public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO, JdbcTemplate jdbcTemplate, ResourceLoader resourceLoader) {
         this.pokemonApi = pokemonApi;
         this.customProperties = customProperties;
         this.speciesService = speciesService;
@@ -39,6 +47,8 @@ public class DataLoader implements ApplicationRunner {
         this.speciesConverterDTO = speciesConverterDTO;
         this.moveService = moveService;
         this.moveConverterDTO = moveConverterDTO;
+        this.jdbcTemplate = jdbcTemplate;
+        this.resourceLoader = resourceLoader;
     }
 
     @Override
@@ -46,7 +56,7 @@ public class DataLoader implements ApplicationRunner {
         loadTypes();
         loadSpecies();
         loadMoves();
-    }
+        loadUnknownDataTypes(); }
 
     public void loadTypes() {
         if(!this.typeService.findAll().isEmpty()) return;
@@ -75,5 +85,26 @@ public class DataLoader implements ApplicationRunner {
         moves.stream()
                 .map(this.moveConverterDTO::convertFromDTOToVO)
                 .forEach(this.moveService::save);
+    }
+
+    private void loadUnknownDataTypes() {
+        if(containsUnknownDataTypes()){
+            return;
+        }
+        try {
+            Resource resource = resourceLoader.getResource("file:" + this.customProperties.getUnknownDataTypeScriptPath());
+            String scriptContent = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()), StandardCharsets.UTF_8);
+
+            String[] sqlBatch = scriptContent.split(";");
+
+            jdbcTemplate.batchUpdate(sqlBatch);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private boolean containsUnknownDataTypes(){
+        return this.typeService.exists(this.customProperties.getUnknownTypeID()) &&
+                this.moveService.exists(this.customProperties.getUnknownMoveID()) &&
+                this.speciesService.exists(this.customProperties.getUnknownSpeciesID());
     }
 }

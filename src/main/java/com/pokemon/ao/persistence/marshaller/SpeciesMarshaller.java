@@ -11,8 +11,7 @@ public class SpeciesMarshaller implements Marshaller<SpeciesVO, Species> {
     private final TypeMarshaller typeMarshaller;
 
     @Autowired
-
-    public SpeciesMarshaller(TypeMarshaller typeMarshaller) {
+    private SpeciesMarshaller(TypeMarshaller typeMarshaller) {
         this.typeMarshaller = typeMarshaller;
     }
 

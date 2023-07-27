@@ -22,15 +22,17 @@ CREATE TABLE species(
 
 CREATE TABLE pokemon(
     id INT PRIMARY KEY AUTO_INCREMENT,
+    entity_type VARCHAR(255),
     name VARCHAR(255) NOT NULL,
     species_id INT NOT NULL,
     current_hp INT NOT NULL,
     max_hp INT NOT NULL,
     original_trainer VARCHAR(255) NOT NULL,
+    original_species_id INT,
     FOREIGN KEY (species_id) REFERENCES species (id)
 );
 
-CREATE TABLE pokemon_moves(
+CREATE TABLE pokemon_move(
     pokemon_id INT NOT NULL,
     move_slot VARCHAR(255) NOT NULL,
     move_id INT NOT NULL,

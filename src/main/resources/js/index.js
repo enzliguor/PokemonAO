@@ -3,6 +3,7 @@
 const pokeball = document.getElementById('pokeball');
 const pokemonContainer = document.getElementById('pokemon-container');
 let pokemonTeam;
+const tradeButton = document.getElementById('trade-section');
 
 async function fetchRandomTeam() {
     pokeball.src = '../static/images/index/Opened-pokeball.png';
@@ -22,6 +23,7 @@ async function fetchRandomTeam() {
             console.log(pokemonTeam);
             // Crea le card dei Pokémon nella squadra
             createPokemonCards();
+            tradeButton.setAttribute("style", "display: inline-block")
         } catch (error) {
             console.error('Errore durante la fetch:', error);
         }

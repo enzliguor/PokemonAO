@@ -6,22 +6,25 @@ import com.pokemon.ao.domain.PokemonVO;
 import com.pokemon.ao.dto.PokemonDTO;
 import com.pokemon.ao.dto.converter.PokemonConverterDTO;
 import com.pokemon.ao.dto.utility.DTOValidator;
-import com.pokemon.ao.exception.ExchangeStatusException;
 import com.pokemon.ao.persistence.service.PokemonService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
+@Transactional(rollbackFor = Exception.class)
 @RequestMapping("/api/pokemon")
 public class PokemonExchangeController {
 
@@ -39,60 +42,68 @@ public class PokemonExchangeController {
         this.dtoValidator = dtoValidator;
         this.customProperties = customProperties;
     }
+
     @PostMapping("/exchange/{id}")
     public ResponseEntity<PokemonVO> exchangePokemon(@PathVariable Integer id) {
         PokemonVO pokemonToExchange = this.pokemonService.findById(id);
-        PokemonDTO pokemonToExchangeDTO = this.pokemonConverterDTO.convertFromVOToDTO(pokemonToExchange);
-
-        if (!this.dtoValidator.isValidPokemonDTO(pokemonToExchangeDTO)) {
-            return ResponseEntity.badRequest().body(pokemonToExchange);
+        if (pokemonToExchange == null) {
+            return ResponseEntity.badRequest().build();
         }
-        String pokemonDajeExchangeUrl = this.customProperties.getPokemonDajeExchangeUrl();
 
-        ResponseEntity<ExchangeResponse> response = restTemplate.postForEntity(pokemonDajeExchangeUrl, pokemonToExchangeDTO, ExchangeResponse.class);
-        HttpStatusCode statusCode = response.getStatusCode();
+        PokemonDTO pokemonToExchangeDTO = this.pokemonConverterDTO.convertFromVOToDTO(pokemonToExchange);
+        if (!this.dtoValidator.isValidPokemonDTO(pokemonToExchangeDTO)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        ResponseEntity<ExchangeResponse> response = callRemoteExchange(pokemonToExchangeDTO);
         ExchangeResponse exchangeResponse = response.getBody();
-
-        if (statusCode == HttpStatus.OK && exchangeResponse!=null){
+        if (exchangeResponse != null) {
             PokemonDTO receivedPokemonDTO = exchangeResponse.getPokemon();
 
             if (!this.dtoValidator.isValidPokemonDTO(receivedPokemonDTO)) {
                 communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(400));
                 return ResponseEntity.internalServerError().body(pokemonToExchange);
             }
-
             try {
                 PokemonVO exchangedPokemon = performExchange(pokemonToExchange, receivedPokemonDTO, exchangeResponse.getExchangeId());
                 return ResponseEntity.ok().body(exchangedPokemon);
             } catch (Exception exception) {
-                communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(500));
-                return ResponseEntity.internalServerError().body(pokemonToExchange);
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                try{
+                    communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(500));
+                }catch (RestClientException e){
+                    return ResponseEntity.internalServerError().body(null);
+                }
+                return ResponseEntity.internalServerError().body(null);
             }
         }
-        return ResponseEntity.internalServerError().body(pokemonToExchange);
-
+        return ResponseEntity.internalServerError().body(null);
+    }
+    private ResponseEntity<ExchangeResponse> callRemoteExchange(PokemonDTO pokemonToExchangeDTO) {
+        String pokemonDajeExchangeUrl = this.customProperties.getPokemonDajeExchangeUrl();
+        ResponseEntity<ExchangeResponse> response;
+        try {
+            response = restTemplate.postForEntity(pokemonDajeExchangeUrl, pokemonToExchangeDTO, ExchangeResponse.class);
+        } catch (RestClientException e) {
+            return ResponseEntity.internalServerError().body(null);
+        }
+    return response;
     }
 
-    public PokemonVO performExchange(PokemonVO pokemonToExchange, PokemonDTO receivedPokemonDTO, String exchangeID) throws ExchangeStatusException {
+    public PokemonVO performExchange(PokemonVO pokemonToExchange, PokemonDTO receivedPokemonDTO, String exchangeID) {
         PokemonVO receivedPokemonVO = this.pokemonConverterDTO.convertFromDTOToVO(receivedPokemonDTO);
         PokemonVO newPokemon = this.pokemonService.save(receivedPokemonVO);
         this.pokemonService.delete(pokemonToExchange.getId());
-        ResponseEntity<HttpStatusCode> response = communicateStatusExchange(exchangeID, new StatusExchange(200));
-        HttpStatusCode statusCode = response.getStatusCode();
-        if (statusCode != HttpStatus.OK) {
-            throw new ExchangeStatusException("Errore durante la comunicazione dello stato dell'exchange");
-        }
+
+        communicateStatusExchange(exchangeID, new StatusExchange(200));
         return newPokemon;
     }
 
-    private ResponseEntity<HttpStatusCode> communicateStatusExchange(String exchangeID, StatusExchange statusExchange) {
+    private ResponseEntity<Void> communicateStatusExchange(String exchangeID, StatusExchange statusExchange) {
         String pokemonDajeStatusExchangeUrl = this.customProperties.getPokemonDajeStatusExchangeUrl();
         String constructedUrl = UriComponentsBuilder.fromUriString(pokemonDajeStatusExchangeUrl).buildAndExpand(exchangeID).toUriString();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<StatusExchange> httpEntity = new HttpEntity<>(statusExchange, headers);
-        return restTemplate.exchange(constructedUrl, HttpMethod.POST, httpEntity, HttpStatusCode.class);
+        HttpEntity<StatusExchange> requestEntity = new HttpEntity<>(statusExchange);
+        return restTemplate.exchange(constructedUrl, HttpMethod.POST, requestEntity, Void.class);
     }
 
     @Getter

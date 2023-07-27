@@ -4,7 +4,7 @@ const pokeball = document.getElementById('pokeball');
 const pokemonContainer = document.getElementById('pokemon-container');
 let pokemonTeam;
 const tradeButton = document.getElementById('trade-section');
-let receivedPokemon;
+let exchangedPokemon;
 
 
 async function fetchRandomTeam() {
@@ -134,7 +134,7 @@ function randomizeIndex() {
     return  Math.floor( randomizedNumber * (pokemonTeam.length - 1));
 }
 
-function createReceivedPokemonCard(randomizedIndex) {
+function createExchangedPokemonCard(randomizedIndex) {
     let receivedPokemonCard = document.createElement('div');
     receivedPokemonCard.className = 'col-sm-6 col-md-6 col-lg-3 mb-4';
 
@@ -143,25 +143,25 @@ function createReceivedPokemonCard(randomizedIndex) {
         <div id="pokemon-${randomizedIndex}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em">
           <div style="border-bottom: 5px solid #ffcb05">
             <div class="px-5 pt-2 ad-titl">
-                <h5 id="species-name" class="font-weight-bold" style="font-family: 'Gill Sans', sans-serif;">${receivedPokemon.species.name.toUpperCase()}</h5>
-                <h6 id="HP">${receivedPokemon.currentHp}/${receivedPokemon.maxHp} HP</h6>
+                <h5 id="species-name" class="font-weight-bold" style="font-family: 'Gill Sans', sans-serif;">${exchangedPokemon.species.name.toUpperCase()}</h5>
+                <h6 id="HP">${exchangedPokemon.currentHp}/${exchangedPokemon.maxHp} HP</h6>
             </div>
-            <img id="icon-type" class="icon-type" src="${receivedPokemon.species.type.icon}" alt="Alternate Text" />
+            <img id="icon-type" class="icon-type" src="${exchangedPokemon.species.type.icon}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-3">
-            <img id="sprites" class="grass-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${receivedPokemon.species.spriteUrl}" alt="Alternate Text" />
+            <img id="sprites" class="grass-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${exchangedPokemon.species.spriteUrl}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-2">
-            <h5 id="pokemon-name">${receivedPokemon.name}</h5>
+            <h5 id="pokemon-name">${exchangedPokemon.name}</h5>
           </div>
           <div id="moves" class="card-body" style="font-family: 'Gill Sans', sans-serif; height: 150px">
             <ul class="list-group">
               <!-- Ciclo for per creare dinamicamente le mosse del Pokémon -->
-              ${createMovesMarkup(receivedPokemon.moves)}
+              ${createMovesMarkup(exchangedPokemon.moves)}
             </ul>
           </div>
           <div class="d-flex justify-content-center pokemon-trainer">
-            <p>${receivedPokemon.originalTrainer}</p>
+            <p>${exchangedPokemon.originalTrainer}</p>
           </div>
         </div>   
       `;
@@ -173,10 +173,10 @@ async function exchangePokemon() {
     let selectedPokemon = pokemonTeam.at(randomizedIndex);
     const response = await fetch('http://localhost:8080/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {
-        receivedPokemon = await response.json();
-        console.log(receivedPokemon);
+        exchangedPokemon = await response.json();
+        console.log(exchangedPokemon);
         document.getElementById("pokemon-" + randomizedIndex).remove();
-        createReceivedPokemonCard(randomizedIndex);
+        createExchangedPokemonCard(randomizedIndex);
     } else {
         alert("HTTP ERROR:" + response.status);
     }

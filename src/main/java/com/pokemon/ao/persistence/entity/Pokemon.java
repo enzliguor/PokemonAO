@@ -1,36 +1,40 @@
 package com.pokemon.ao.persistence.entity;
 
+import com.pokemon.ao.domain.MoveSlot;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Set;
+import lombok.experimental.SuperBuilder;
+
+import java.util.Map;
 
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "entity_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "pokemon")
 public class Pokemon implements EntityDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
 
     @Column(name = "name")
-    private String name;
+    protected String name;
     @ManyToOne
     @JoinColumn(name = "species_id")
-    private Species species;
+    protected Species species;
 
     @Column ( name = "current_hp")
-    private int currentHp;
+    protected int currentHp;
 
     @Column (name = "max_hp")
-    private int maxHp;
+    protected int maxHp;
 
     @ManyToMany
-    @JoinTable(
-            name = "pokemon_moves",
+    @JoinTable(name = "pokemon_moves",
             joinColumns = @JoinColumn(name = "pokemon_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id")
     )
@@ -39,5 +43,5 @@ public class Pokemon implements EntityDB {
     protected Map<MoveSlot, Move> moves;
 
     @Column(name = "original_trainer")
-    private String originalTrainer;
+    protected String originalTrainer;
 }

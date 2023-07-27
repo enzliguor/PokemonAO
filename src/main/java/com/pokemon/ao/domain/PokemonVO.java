@@ -1,19 +1,23 @@
 package com.pokemon.ao.domain;
 
-import lombok.*;
-import java.util.Set;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.util.Map;
 
-@Builder
+@SuperBuilder
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PokemonVO implements ValueObject {
-    private Integer id;
-    private String name;
-    private SpeciesVO species;
-    private int currentHp;
-    private int maxHp;
-    private Set<MoveVO> moves;
+    protected Integer id;
+    protected String name;
+    protected SpeciesVO species;
+    protected int currentHp;
+    protected int maxHp;
+    protected Map<MoveSlot, MoveVO> moves;
     private String originalTrainer;
 }

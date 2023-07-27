@@ -31,22 +31,18 @@ public class PokemonConverterDTO implements ConverterDTO<PokemonDTO, PokemonVO> 
 
     @Override
     public PokemonVO convertFromDTOToVO(PokemonDTO pokemonDTO) {
-        PokemonVO pokemonVO = PokemonVO.builder()
+        SpeciesVO speciesVO = this.speciesService.findById(pokemonDTO.getSpeciesId());
+        if (speciesVO == null) {
+            return createUnknownPokemonVO(pokemonDTO);
+        }
+        return PokemonVO.builder()
                 .name(pokemonDTO.getName())
-                .species(this.speciesService.findById(pokemonDTO.getSpeciesId()))
+                .species(speciesVO)
                 .currentHp(pokemonDTO.getCurrentHp())
                 .maxHp(pokemonDTO.getMaxHp())
                 .moves(this.moveService.mapMovesIdsToMoveVO(pokemonDTO.getMovesIds()))
                 .originalTrainer(pokemonDTO.getOriginalTrainer())
                 .build();
-        if (pokemonVO.getSpecies() == null) {
-            SpeciesVO speciesVO = this.speciesService.findById(this.customProperties.getUnknownSpeciesID());
-            pokemonVO.setSpecies(speciesVO);
-            UnknownPokemonVO unknownPokemonVO = (UnknownPokemonVO) pokemonVO;
-            unknownPokemonVO.setOriginalSpeciesID(pokemonDTO.getSpeciesId());
-            return unknownPokemonVO;
-        }
-        return pokemonVO;
     }
 
     @Override
@@ -62,6 +58,19 @@ public class PokemonConverterDTO implements ConverterDTO<PokemonDTO, PokemonVO> 
                         .map(MoveVO::getId)
                         .collect(Collectors.toSet()))
                 .originalTrainer(pokemonVO.getOriginalTrainer())
+                .build();
+    }
+
+    private PokemonVO createUnknownPokemonVO(PokemonDTO pokemonDTO) {
+        SpeciesVO speciesVO = this.speciesService.findById(this.customProperties.getUnknownSpeciesID());
+        return UnknownPokemonVO.builder()
+                .name(pokemonDTO.getName())
+                .species(speciesVO)
+                .currentHp(pokemonDTO.getCurrentHp())
+                .maxHp(pokemonDTO.getMaxHp())
+                .moves(this.moveService.mapMovesIdsToMoveVO(pokemonDTO.getMovesIds()))
+                .originalTrainer(pokemonDTO.getOriginalTrainer())
+                .originalSpeciesID(pokemonDTO.getSpeciesId())
                 .build();
     }
 }

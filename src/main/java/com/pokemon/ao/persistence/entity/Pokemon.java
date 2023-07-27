@@ -34,7 +34,7 @@ public class Pokemon implements EntityDB {
     protected int maxHp;
 
     @ManyToMany
-    @JoinTable(name = "pokemon_moves",
+    @JoinTable(name = "pokemon_move",
             joinColumns = @JoinColumn(name = "pokemon_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id")
     )

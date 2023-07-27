@@ -32,7 +32,7 @@ CREATE TABLE pokemon(
     FOREIGN KEY (species_id) REFERENCES species (id)
 );
 
-CREATE TABLE pokemon_moves(
+CREATE TABLE pokemon_move(
     pokemon_id INT NOT NULL,
     move_slot VARCHAR(255) NOT NULL,
     move_id INT NOT NULL,

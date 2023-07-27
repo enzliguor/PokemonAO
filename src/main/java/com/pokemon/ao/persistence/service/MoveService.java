@@ -17,9 +17,21 @@ public class MoveService extends AbstractService<MoveVO, Move, Integer> {
         super(marshaller, dao);
     }
 
-    public Set<MoveVO> mapMovesIdsToMoveVO(Set<Integer> movesId ) {
-        return movesId.stream ()
-                .map(this::findById)
-                .collect(Collectors.toSet());
+    public Map<MoveSlot, MoveVO> mapMovesIdsToMoveVO(Set<Integer> movesId ) {
+        List<Integer> moves = new ArrayList<>(movesId);
+        return IntStream.range(0, MoveSlot.values().length)
+                .boxed()
+                .collect(Collectors.toMap(
+                        index -> MoveSlot.values()[index],
+                        index -> {
+                            MoveVO moveVO = this.findById(moves.get(index));
+                            if(moveVO == null){
+                                UnknownMoveVO unknownMove = (UnknownMoveVO) this.findById(this.customProperties.getUnknownMoveID());
+                                unknownMove.setOriginalMoveId(moves.get(index));
+                                return unknownMove;
+                            }
+                            return moveVO;
+                        }
+                ));
     }
 }

@@ -34,7 +34,9 @@ public class Pokemon implements EntityDB {
             joinColumns = @JoinColumn(name = "pokemon_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id")
     )
-    private Set<Move> moves;
+    @MapKeyEnumerated(value = EnumType.STRING)
+    @MapKeyColumn(name = "move_slot", table = "pokemon_moves")
+    protected Map<MoveSlot, Move> moves;
 
     @Column(name = "original_trainer")
     private String originalTrainer;

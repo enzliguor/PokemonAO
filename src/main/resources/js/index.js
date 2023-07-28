@@ -24,13 +24,7 @@ async function fetchRandomTeam() {
 
         try {
             const response = await fetch('http://localhost:8080/api/pokemon/random-team');
-            const data = await response.json(); // Converte la risposta in formato JSON
-
-            // Conserva la lista di Pokemon in una variabile
-            pokemonTeam = data;
-            // Stampa i dati della risposta nella console
-            console.log(pokemonTeam);
-            // Crea le card dei Pokémon nella squadra
+            pokemonTeam = await response.json();
             createPokemonCards();
             tradeButton.setAttribute("style", "display: inline-block")
         } catch (error) {

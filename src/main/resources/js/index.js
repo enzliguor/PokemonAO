@@ -64,8 +64,8 @@ function generatePokemonCard(pokemon, index) {
 
     card.innerHTML = `
         <!-- Category Card -->
-        <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em">
-          <div style="border-bottom: 5px solid #ffcb05">
+        <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em; font-family: 'SF distant Galaxy',sans-serif">
+          <div style="border-bottom: 5px solid #ffcb05 ">
             <div class="px-5 pt-2 ad-titl">
                 <h5 id="species-name" class="font-weight-bold">${pokemon.species.name.toUpperCase()}</h5>
                 <h6 id="HP">${pokemon.currentHp}/${pokemon.maxHp} HP</h6>

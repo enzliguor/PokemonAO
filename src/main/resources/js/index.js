@@ -6,6 +6,13 @@ let pokemonTeam;
 const tradeButton = document.getElementById('trade-section');
 let exchangedPokemon;
 
+function hyphenToTitleCase(inputString) {
+    const words = inputString.split("-");
+    const titleCaseWords = words.map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+    return titleCaseWords.join(" ");
+}
 
 async function fetchRandomTeam() {
     pokeball.src = '../static/images/index/Opened-pokeball.png';
@@ -39,7 +46,7 @@ function createMovesMarkup(moves) {
               <li class="list-inline-item">
                   <img width="30px" height="30px" src="${move.type.icon}" alt="Alternate Text" />
               </li>
-              <li class="list-inline-item move-font-size">${move.name}</li>
+              <li class="list-inline-item move-font-size">${hyphenToTitleCase(move.name)}</li>
               <li class="list-inline-item move-font-size">${move.power}</li>
       </ul>
     `).join('');

@@ -14,14 +14,7 @@ body {
     cursor: pointer;
 }
 
-.icon-type {
- position: absolute;
- right: -10px;
- top: -20px;
- border-radius: 50%;
- width: 80px;
- height: 80px;
-}
+
 
 .bug-gradient-bg {
  background: linear-gradient(45deg, #1c4b27, #3c9950);
@@ -132,4 +125,15 @@ body {
     height: auto;
     max-width: 25%;
 }
-  
+
+
+
+
+.icon-type {
+
+    width: 27%;
+    position: absolute; /* Abilita il posizionamento assoluto */
+    top: -1px; /* Spazio di 10px dalla parte superiore della card */
+    right: -1px; /* Spazio di 10px dalla parte destra della card */
+    border-radius: 50%; /* Imposta il bordo circolare */
+}

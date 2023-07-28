@@ -49,11 +49,20 @@ function createMovesMarkup(moves) {
 function createPokemonCards() {
     // Loop attraverso la squadra di Pokémon
     pokemonTeam.forEach((pokemon, index) => {
-        const card = document.createElement('div');
-        const typeClass = getTypeClass(pokemon.species.type.name); // Funzione per ottenere la classe CSS del tipo
-        card.className = 'col-lg-4 col-md-4 col-sm-6 mb-4';
+        generatePokemonCard(pokemon, index)
+    });
+}
 
-        card.innerHTML = `
+function randomizeIndex() {
+    const randomizedNumber = Math.random();
+    return  Math.floor( randomizedNumber * (pokemonTeam.length - 1));
+}
+
+function generatePokemonCard(pokemon, index) {
+    const card = document.createElement('div');
+    card.className = 'col-lg-4 col-md-4 col-sm-6 mb-4';
+
+    card.innerHTML = `
         <!-- Category Card -->
         <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em">
           <div style="border-bottom: 5px solid #ffcb05">
@@ -64,12 +73,12 @@ function createPokemonCards() {
             <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-3">
-            <img id="sprites" class="${typeClass}" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
+            <img id="sprites" class="${pokemon.species.type.name}-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-2">
             <h5 id="pokemon-name">${pokemon.name}</h5>
           </div>
-          <div id="moves" class="card-body" style="height: 150px">
+          <div id="moves" class="card-body" style="height: 200px">
             <ul class="list-group">
               <!-- Ciclo for per creare dinamicamente le mosse del Pokémon -->
               ${createMovesMarkup(pokemon.moves)}
@@ -81,103 +90,20 @@ function createPokemonCards() {
         </div>   
       `;
 
-        pokemonContainer.appendChild(card);
-    });
-}
-
-// Funzione per ottenere la classe CSS in base al nome del tipo del Pokémon
-function getTypeClass(typeName) {
-    switch (typeName) {
-        case 'bug':
-            return 'bug-gradient-bg';
-        case 'poison':
-            return 'poison-gradient-bg';
-        case 'steel':
-            return 'steel-gradient-bg';
-        case 'fire':
-            return 'fire-gradient-bg';
-        case 'water':
-            return 'water-gradient-bg';
-        case 'electric':
-            return 'electric-gradient-bg';
-        case 'grass':
-            return 'grass-gradient-bg';
-        case 'psychic':
-            return 'psychic-gradient-bg';
-        case 'normal':
-            return 'normal-gradient-bg';
-        case 'ice':
-            return 'ice-gradient-bg';
-        case 'ghost':
-            return 'ghost-gradient-bg';
-        case 'flying':
-            return 'flying-gradient-bg';
-        case 'fighting':
-            return 'fighting-gradient-bg';
-        case 'fairy':
-            return 'fairy-gradient-bg';
-        case 'dragon':
-            return 'dragon-gradient-bg';
-        case 'dark':
-            return 'dark-gradient-bg';
-        case 'rock':
-            return 'rock-gradient-bg';
-        case 'ground':
-            return 'ground-gradient-bg';
-        // Aggiungi altri casi per gli altri tipi
-        default:
-            return 'gradient-bg';
-    }
-}
-
-function randomizeIndex() {
-    let randomizedNumber = Math.random();
-    return  Math.floor( randomizedNumber * (pokemonTeam.length - 1));
-}
-
-function createExchangedPokemonCard(randomizedIndex) {
-    let receivedPokemonCard = document.createElement('div');
-    receivedPokemonCard.className = 'col-sm-6 col-md-6 col-lg-3 mb-4';
-
-    receivedPokemonCard.innerHTML = `
-        <!-- Category Card -->
-        <div id="pokemon-${randomizedIndex}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em">
-          <div style="border-bottom: 5px solid #ffcb05">
-            <div class="px-5 pt-2 ad-titl">
-                <h5 id="species-name" class="font-weight-bold" style="font-family: 'Gill Sans', sans-serif;">${exchangedPokemon.species.name.toUpperCase()}</h5>
-                <h6 id="HP">${exchangedPokemon.currentHp}/${exchangedPokemon.maxHp} HP</h6>
-            </div>
-            <img id="icon-type" class="icon-type" src="${exchangedPokemon.species.type.icon}" alt="Alternate Text" />
-          </div>
-          <div class="d-flex justify-content-center mt-3">
-            <img id="sprites" class="grass-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${exchangedPokemon.species.spriteUrl}" alt="Alternate Text" />
-          </div>
-          <div class="d-flex justify-content-center mt-2">
-            <h5 id="pokemon-name">${exchangedPokemon.name}</h5>
-          </div>
-          <div id="moves" class="card-body" style="font-family: 'Gill Sans', sans-serif; height: 150px">
-            <ul class="list-group">
-              <!-- Ciclo for per creare dinamicamente le mosse del Pokémon -->
-              ${createMovesMarkup(exchangedPokemon.moves)}
-            </ul>
-          </div>
-          <div class="d-flex justify-content-center pokemon-trainer">
-            <p>${exchangedPokemon.originalTrainer}</p>
-          </div>
-        </div>   
-      `;
-    pokemonContainer.appendChild(receivedPokemonCard);
+    pokemonContainer.appendChild(card);
 }
 
 async function exchangePokemon() {
-    let randomizedIndex = randomizeIndex();
-    let selectedPokemon = pokemonTeam.at(randomizedIndex);
+    const randomizedIndex = randomizeIndex();
+    const selectedPokemon = pokemonTeam.at(randomizedIndex);
     const response = await fetch('http://localhost:8080/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {
         exchangedPokemon = await response.json();
-        console.log(exchangedPokemon);
+        pokemonTeam.push(exchangedPokemon);
+        pokemonTeam.splice(randomizedIndex);
         document.getElementById("pokemon-" + randomizedIndex).remove();
-        createExchangedPokemonCard(randomizedIndex);
+        const exchangedPokemonIndex = pokemonTeam.length - 1;
+        generatePokemonCard(exchangedPokemon, exchangedPokemonIndex);
     } else {
         alert("HTTP ERROR:" + response.status);
     }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon AO</title>
+    <!-- Aggiungi il link al tuo file CSS personalizzato -->
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/b357504117fd83d25e5a63601455b367?family=SF+Distant+Galaxy" rel="stylesheet">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+</head>
+<body>
+    <header>
+        <div id="header" class="container mt-4">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-around">
+                    <h1 class="text-center">
+                        <img width="400" src="https://cdn.discordapp.com/attachments/1130876162403467354/1130880734689771530/11zon_cropped.png"
+                             class="img-fluid" alt="Pokémon Image">
+                    </h1>
+                    <div id="trade-section" class="trade-section" style="display: none">
+                        <h2 class="text-right mt-3 mr-4 mb-1">Click here to trade</h2>
+                        <div class="bounce-1">
+                            <img width="350px" src="static/images/index/pokemon-trade-removebg-preview.png" alt="Trade button">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- error message Modal -->
+    <div class="modal fade errorMessageModal" id="errorMessageModal" tabindex="-1" role="dialog" aria-hidden="true"
+         data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-borders-content">
+                <div class="modal-header btn-danger modal-borders-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">OPS... SCAMBIO FALLITO</h5>
+                </div>
+                <div class="modal-body d-flex align-items-center">
+                    <p class="body-modal-font-size">Non è stato possibile effettuare lo scambio del Pokémon</p>
+                    <img class="text-center" width="200px" src="static/images/index/pickachu_sad.png">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger modal-borders-content" data-dismiss="modal">Indietro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <div class="row my-md-4" id="pokemon-container">
+                <div class="col-md-12 text-center mt-5">
+                    <img src="static/images/index/Pokeball.png" id="pokeball" class="img-pokeball" alt="Pokeball Image">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="static/js/index.js"></script>
+
+</body>
+
+</html>

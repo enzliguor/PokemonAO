@@ -66,7 +66,7 @@ function generatePokemonCard(pokemon, index) {
             <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-3">
-            <img id="sprites" class="${pokemon.species.type.name}-gradient-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
+            <img id="sprites" class="${pokemon.species.type.name}-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
           </div>
           <div class="d-flex justify-content-center mt-2">
             <h5 id="pokemon-name">${pokemon.name}</h5>

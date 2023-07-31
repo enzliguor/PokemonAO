@@ -1,0 +1,84 @@
+defaultPokemon:
+  id: 0
+  name: 'Gren'
+  species:
+    id: 0
+    spriteUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
+    name: 'squirtle'
+    type:
+      id: 0
+      name: 'water'
+      icon: 'https://i.imgur.com/AITT6dU.png'
+  currentHp: 100
+  maxHp: 100
+  moves:
+    SLOT_1:
+      id: 0
+      name: 'idropompa'
+      type:
+        id: 0
+        name: 'water'
+        icon: 'https://i.imgur.com/AITT6dU.png'
+      power: 10
+  originalTrainer: 'Sgarbi'
+
+#Unknown Data Type Script Path
+unknownDataTypeScriptPath: 'C:\Users\vliguori\Desktop\PokemonAO\utility\db\unknownDataType.sql'
+
+#Unknown Species ID:
+unknownSpeciesID: 10000
+
+#Unknown Move ID:
+unknownMoveID: 10000
+
+#Unknown Type ID:
+unknownTypeID: 10000
+
+#Default Move ID
+defaultMoveID: 1
+
+#Daje URL
+pokemonDajeExchangeUrl: 'html://localhost:8080/api/pokemon/exchange'
+pokemonDajeStatusExchangeUrl: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
+
+#API Pokemon.co
+pokemonApiSpeciesUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
+pokemonApiMovesUrl: 'https://pokeapi.co/api/v2/move/{name}'
+pokemonApiTypesUrl: 'https://pokeapi.co/api/v2/type/{name}'
+
+#Icons URLs
+typeIcons:
+  ground: https://i.imgur.com/O3ZNXxT.png
+  poison: https://i.imgur.com/WerWKO0.png
+  fire: https://i.imgur.com/PIfsuGY.png
+  water: https://i.imgur.com/AITT6dU.png
+  electric: https://i.imgur.com/TKgE4D4.png
+  steel: https://i.imgur.com/NruyaNB.png
+  psychic: https://i.imgur.com/uiTpylA.png
+  normal: https://i.imgur.com/uEeFwee.png
+  ice: https://i.imgur.com/GicpTsp.png
+  grass: https://i.imgur.com/BtPM9xr.png
+  ghost: https://i.imgur.com/WTeLVDI.png
+  flying: https://i.imgur.com/wGG2U29.png
+  fighting: https://i.imgur.com/DWf4eX9.png
+  fairy: https://i.imgur.com/HVxHjkZ.png
+  dragon: https://i.imgur.com/8eCmLct.png
+  dark: https://i.imgur.com/La0v3eo.png
+  bug: https://i.imgur.com/2ngWiIE.png
+  rock: https://i.imgur.com/noI1DFh.png
+
+#Known species
+speciesCount: 151
+
+#Known moves
+movesCount: 161
+
+#MaxMoves per Pokemon
+maxMovesPerPokemon: 4
+
+#MinMoves per Pokemon
+minMovesPerPokemon: 1
+
+#Team random size
+teamSize: 6
+

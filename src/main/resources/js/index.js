@@ -101,11 +101,12 @@ async function exchangePokemon() {
     const response = await fetch('http://localhost:8080/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {
         exchangedPokemon = await response.json();
-        pokemonTeam.push(exchangedPokemon);
-        pokemonTeam.splice(randomizedIndex);
-        document.getElementById("pokemon-" + randomizedIndex).remove();
-        const exchangedPokemonIndex = pokemonTeam.length - 1;
-        generatePokemonCard(exchangedPokemon, exchangedPokemonIndex);
+        pokemonTeam = pokemonTeam.map((pokemon) =>
+            pokemon.id === selectedPokemon.id ? exchangedPokemon : pokemon
+        );
+        const cardToRemove = document.getElementById("pokemon-" + randomizedIndex);
+        pokemonContainer.removeChild(cardToRemove);
+        updatePokemonTeamView();
     } else {
         alert("HTTP ERROR:" + response.status);
     }

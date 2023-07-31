@@ -18,6 +18,106 @@ h2{
     -webkit-text-stroke: 2px #2262a8;
 }
 
+.bug-bg {
+    background-image: url("../images/type-bg/bug.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.dark-bg {
+    background-image: url("../images/type-bg/dark.jpg");
+    background-size: 140%;
+    background-position-x: 50%;
+}
+
+.dragon-bg {
+    background-image: url("../images/type-bg/dragon.jpg");
+    background-size: 160%;
+}
+
+.electric-bg {
+    background-image: url("../images/type-bg/electric.jpg");
+    background-position-x: 50%;
+}
+
+.fairy-bg {
+    background-image: url("../images/type-bg/fairy.jpg");
+    background-size: 100%;
+}
+
+.fighting-bg {
+    background-image: url("../images/type-bg/fighting.jpg");
+    background-size: 200%;
+    background-position-x: 50%;
+}
+
+.fire-bg {
+    background-image: url("../images/type-bg/fire.jpg");
+    background-size: 160%;
+    background-position-y: 100%;
+}
+
+.flying-bg {
+    background-image: url("../images/type-bg/flying.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.ghost-bg {
+    background-image: url("../images/type-bg/ghost.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.grass-bg {
+    background-image: url("../images/type-bg/grass.jpg");
+    background-size: 100%;
+    background-position-x: 50%;
+}
+
+.ground-bg {
+    background-image: url("../images/type-bg/ground.jpg");
+    background-size: 180%;
+    background-position-x: 50%;
+}
+
+.ice-bg {
+    background-image: url("../images/type-bg/ice.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.normal-bg {
+    background-image: url("../images/type-bg/normal.jpg");
+    background-size: 160%;
+}
+
+.poison-bg {
+    background-image: url("../images/type-bg/poison.jpg");
+    background-size: 200%;
+    background-position-x: 50%;
+}
+
+.psychic-bg {
+    background-image: url("../images/type-bg/psychic.jpg");
+    background-size: 140%;
+}
+
+.rock-bg {
+    background-image: url("../images/type-bg/rock.jpg");
+    background-size: 110%;
+}
+
+.steel-bg {
+    background-image: url("../images/type-bg/steel.jpg");
+    background-size: 140%;
+}
+
+.water-bg {
+    background-image: url("../images/type-bg/water.jpg");
+    background-size: 140%;
+}
+
 .bug-gradient-bg {
  background: linear-gradient(45deg, #1c4b27, #3c9950);
 }

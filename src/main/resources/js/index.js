@@ -53,7 +53,7 @@ function createPokemonCards() {
     });
 }
 
-function randomizeIndex() {
+function getRandomIndexFromPokemonTeam() {
     const randomizedNumber = Math.random();
     return  Math.floor( randomizedNumber * (pokemonTeam.length - 1));
 }
@@ -94,7 +94,7 @@ function generatePokemonCard(pokemon, index) {
 }
 
 async function exchangePokemon() {
-    const randomizedIndex = randomizeIndex();
+    const randomizedIndex = getRandomIndexFromPokemonTeam();
     const selectedPokemon = pokemonTeam.at(randomizedIndex);
     const response = await fetch('http://localhost:8080/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {

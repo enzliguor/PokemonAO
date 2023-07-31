@@ -98,6 +98,7 @@ function updatePokemonTeamView(){
 async function exchangePokemon() {
     const randomizedIndex = getRandomIndexFromPokemonTeam();
     const selectedPokemon = pokemonTeam.at(randomizedIndex);
+    const modalError = document.getElementById('div');
     const response = await fetch('http://localhost:8080/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {
         exchangedPokemon = await response.json();
@@ -108,7 +109,9 @@ async function exchangePokemon() {
         pokemonContainer.removeChild(cardToRemove);
         updatePokemonTeamView();
     } else {
-        alert("HTTP ERROR:" + response.status);
+        console.log("Errore nello scambio del Pokemon, lancio modale errore");
+        pokemonContainer.appendChild(modalError);
+        $('#errorMessageModal').modal('show');
     }
 }
 

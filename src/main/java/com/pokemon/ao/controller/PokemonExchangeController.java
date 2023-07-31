@@ -1,6 +1,8 @@
 package com.pokemon.ao.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemon.ao.config.CustomProperties;
 import com.pokemon.ao.domain.PokemonVO;
 import com.pokemon.ao.dto.PokemonDTO;
@@ -33,14 +35,16 @@ public class PokemonExchangeController {
     private final PokemonConverterDTO pokemonConverterDTO;
     private final DTOValidator dtoValidator;
     private final CustomProperties customProperties;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public PokemonExchangeController(RestTemplate restTemplate, PokemonService pokemonService, PokemonConverterDTO pokemonConverterDTO, DTOValidator dtoValidator, CustomProperties customProperties) {
+    public PokemonExchangeController(RestTemplate restTemplate, PokemonService pokemonService, PokemonConverterDTO pokemonConverterDTO, DTOValidator dtoValidator, CustomProperties customProperties, ObjectMapper objectMapper) {
         this.restTemplate = restTemplate;
         this.pokemonService = pokemonService;
         this.pokemonConverterDTO = pokemonConverterDTO;
         this.dtoValidator = dtoValidator;
         this.customProperties = customProperties;
+        this.objectMapper = objectMapper;
     }
 
     @PostMapping("/exchange/{id}")
@@ -57,8 +61,14 @@ public class PokemonExchangeController {
             return ResponseEntity.badRequest().build();
         }
 
-        ResponseEntity<ExchangeResponse> response = callRemoteExchange(pokemonToExchangeDTO);
-        ExchangeResponse exchangeResponse = response.getBody();
+        ResponseEntity<String> response = callRemoteExchange(pokemonToExchangeDTO);
+        ExchangeResponse exchangeResponse;
+        try {
+            exchangeResponse = this.objectMapper.readValue(response.getBody(), ExchangeResponse.class);
+        } catch (JsonProcessingException e) {
+            log.error("UNEXPECTED DATA FROM PokemonDAJE");
+            return ResponseEntity.internalServerError().body(pokemonToExchange);
+        }
         if (exchangeResponse != null) {
             PokemonDTO receivedPokemonDTO = exchangeResponse.getPokemon();
 
@@ -88,11 +98,11 @@ public class PokemonExchangeController {
         return ResponseEntity.internalServerError().body(null);
     }
 
-    private ResponseEntity<ExchangeResponse> callRemoteExchange(PokemonDTO pokemonToExchangeDTO) {
+    private ResponseEntity<String> callRemoteExchange(PokemonDTO pokemonToExchangeDTO) {
         String pokemonDajeExchangeUrl = this.customProperties.getPokemonDajeExchangeUrl();
-        ResponseEntity<ExchangeResponse> response;
+        ResponseEntity<String> response;
         try {
-            response = restTemplate.postForEntity(pokemonDajeExchangeUrl, pokemonToExchangeDTO, ExchangeResponse.class);
+            response = restTemplate.postForEntity(pokemonDajeExchangeUrl, pokemonToExchangeDTO, String.class);
         } catch (RestClientException e) {
             log.error("ERROR CALLING {}", pokemonDajeExchangeUrl);
             log.error(e.getMessage());

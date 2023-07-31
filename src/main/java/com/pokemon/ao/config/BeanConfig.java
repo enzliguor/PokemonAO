@@ -1,5 +1,7 @@
 package com.pokemon.ao.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,5 +26,12 @@ public class BeanConfig {
                 .getClassLoader()
                 .getResourceAsStream("customProperties.yaml");
         return yaml.load(inputStream);
+    }
+
+    @Bean
+    protected ObjectMapper getObjectMapper(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+        return objectMapper;
     }
 }

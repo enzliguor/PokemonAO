@@ -36,7 +36,7 @@ async function fetchRandomTeam() {
 
 function createMovesMarkup(moves) {
     return moves.map(move => `
-      <ul class="list-inline px-4 d-flex justify-content-between">
+      <ul class="list-inline px-4 d-flex justify-content-between mt-2">
               <li class="list-inline-item">
                   <img width="30px" height="30px" src="${move.type.icon}" alt="Alternate Text" />
               </li>

@@ -20,7 +20,7 @@ defaultPokemon:
         name: 'water'
         icon: 'https://i.imgur.com/AITT6dU.png'
       power: 90
-  originalTrainer: 'default
+  originalTrainer: 'default'
 
 #Unknown Data Type Script Path
 unknownDataTypeScriptPath: 'C:\Users\vliguori\Desktop\PokemonAO\utility\db\unknownDataType.sql'
@@ -38,8 +38,8 @@ unknownTypeID: 10000
 defaultMoveID: 1
 
 #Daje URL
-pokemonDajeExchangeUrl: 'html://localhost:8080/api/pokemon/exchange'
-pokemonDajeStatusExchangeUrl: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
+pokemonDajeExchangeUrl: 'http://localhost:8080/api/pokemon/exchange'
+pokemonDajeStatusExchangeUrl: 'http://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
 
 #API Pokemon.co
 pokemonApiSpeciesUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'

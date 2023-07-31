@@ -25,7 +25,7 @@ async function fetchRandomTeam() {
         try {
             const response = await fetch('http://localhost:8080/api/pokemon/random-team');
             pokemonTeam = await response.json();
-            createPokemonCards();
+            updatePokemonTeamView();
             tradeButton.setAttribute("style", "display: inline-block")
         } catch (error) {
             console.error('Errore durante la fetch:', error);
@@ -44,13 +44,6 @@ function createMovesMarkup(moves) {
               <li class="list-inline-item move-font-size">${move.power}</li>
       </ul>
     `).join('');
-}
-
-function createPokemonCards() {
-    // Loop attraverso la squadra di Pokémon
-    pokemonTeam.forEach((pokemon, index) => {
-        generatePokemonCard(pokemon, index)
-    });
 }
 
 function getRandomIndexFromPokemonTeam() {
@@ -91,6 +84,15 @@ function generatePokemonCard(pokemon, index) {
       `;
 
     pokemonContainer.appendChild(card);
+}
+
+function updatePokemonTeamView(){
+    while (pokemonContainer.firstChild) {
+        pokemonContainer.removeChild(pokemonContainer.firstChild);
+    }
+    pokemonTeam.forEach((pokemon, index) => {
+        generatePokemonCard(pokemon, index)
+    });
 }
 
 async function exchangePokemon() {

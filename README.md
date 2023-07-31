@@ -1,5 +1,5 @@
 # Project Name
-DATALOADER E BEANCONFIG
+
 ## Description
 This is a study project conceived by Davide Costa and developed by:
 1. Alfredo Esposito

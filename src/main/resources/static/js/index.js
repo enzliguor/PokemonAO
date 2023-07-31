@@ -98,7 +98,7 @@ function updatePokemonTeamView(){
 async function exchangePokemon() {
     const randomizedIndex = getRandomIndexFromPokemonTeam();
     const selectedPokemon = pokemonTeam.at(randomizedIndex);
-    const modalError = document.getElementById('div');
+    const modalError = document.getElementById('errorMessageModal');
     const response = await fetch('http://localhost:8080/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {
         exchangedPokemon = await response.json();

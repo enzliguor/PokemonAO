@@ -11,7 +11,11 @@ spring:
     hibernate:
       ddl-auto: 'validate'
 
-#Batch
+#BATCH
 batch:
   databaseConnectionMonitor:
     fixedDelay: 60000
+
+#SERVER
+server:
+  port: 8080

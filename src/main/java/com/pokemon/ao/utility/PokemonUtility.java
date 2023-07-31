@@ -39,9 +39,10 @@ public class PokemonUtility {
                 }
             }else if(!idList.isEmpty()){
                 pokemonList = pokemonService.findAll();
-            }
-            if(pokemonList.isEmpty()) {
-                pokemonList.add(customProperties.getDefaultPokemon());
+            }else{
+                PokemonVO defaultPokemon = this.customProperties.getDefaultPokemon();
+                pokemonList.add(defaultPokemon);
+                this.pokemonService.save(defaultPokemon);
             }
         }catch(NoSuchAlgorithmException e) {
             log.error("Error getting random Pokemon {}", e.getMessage ());

@@ -28,24 +28,7 @@ docker build -t pokemon_ao_db_image .
 ```  
 ```bash
 docker run -d -p 3310:3306 --name pokemon_ao_db pokemon_ao_db_image
-```  
-#### Application Configuration
-In the `application.yaml` file in the `resources` folder, ensure that you comment out the properties under the **DEPLOY** Profile and uncomment the properties under the **DEVELOP** Profile.  
-Also, don't forget to set the `basePath` with the appropriate path for your development environment, as illustrated in the following example.
-```yaml
-#DEPLOY
-#spring.config.import=file:/home/application.yaml
-#path.customProperties=/home/customProperties.yaml
-#path.unknownDataTypeScript=/home/unknownDataType.sql
-
-#DEVELOP
-# Uncomment the following lines and set basePath with the absolute path to the project directory
-basePath=C:/Users/vliguori/Desktop
-spring.config.import=file:/${basePath}/PokemonAO/utility/develop/application.yaml
-path.customProperties=${basePath}/PokemonAO/utility/common-properties/customProperties.yaml
-path.unknownDataTypeScript=${basePath}/PokemonAO/utility/db/unknownDataType.sql
-```  
-Now you are ready to run the project in development mode with the correct database configuration.
+```
 ## Deployment with Docker
 
 To deploy the project using Docker, follow these steps:

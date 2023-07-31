@@ -1,17 +1,11 @@
-#DATABASE
-spring:
-  datasource:
-    username: 'root'
-    url: 'jdbc:mysql://localhost:3310/pokemon_ao_db'
-    password: 'root'
-  jpa:
-    properties:
-      hibernate:
-        dialect: 'org.hibernate.dialect.MySQLDialect'
-    hibernate:
-      ddl-auto: 'validate'
+#DEPLOY
+spring.config.import=file:/home/application.yaml
+path.customProperties=/home/customProperties.yaml
+path.unknownDataTypeScript=/home/unknownDataType.sql
 
-#Batch
-batch:
-  databaseConnectionMonitor:
-    fixedDelay: 60000
+#DEVELOP
+#Uncomment the following lines and set basePath with the absolute path to the project directory
+#basePath=C:/path/to/your/project/directory
+#spring.config.import=file:/${basePath}/PokemonAO/utility/develop/application.yaml
+#path.customProperties=${basePath}/PokemonAO/utility/common-properties/customProperties.yaml
+#path.unknownDataTypeScript=${basePath}/PokemonAO/utility/db/unknownDataType.sql

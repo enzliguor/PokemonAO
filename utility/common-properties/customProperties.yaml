@@ -3,12 +3,12 @@ defaultPokemon:
   name: 'Gren'
   species:
     id: 0
-    spriteUrl: 'https://placeholder:8080/sprite'
-    name: 'Squirtle'
+    spriteUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
+    name: 'squirtle'
     type:
       id: 0
-      name: 'acqua'
-      icon: 'https://placeholder:8080/acqua.png'
+      name: 'water'
+      icon: 'https://i.imgur.com/AITT6dU.png'
   currentHp: 100
   maxHp: 100
   moves:
@@ -17,10 +17,10 @@ defaultPokemon:
       name: 'idropompa'
       type:
         id: 0
-        name: 'acqua'
-        icon: 'https://placeholder:8080/acqua.png'
+        name: 'water'
+        icon: 'https://i.imgur.com/AITT6dU.png'
       power: 10
-  originalTrainer: 'default'
+  originalTrainer: 'Sgarbi'
 
 #Unknown Data Type Script Path
 unknownDataTypeScriptPath: 'C:\Users\vliguori\Desktop\PokemonAO\utility\db\unknownDataType.sql'

@@ -28,5 +28,7 @@ public class CustomProperties {
     private Integer unknownSpeciesID;
     private Integer unknownMoveID;
     private Integer unknownTypeID;
-
+    private int pokemonExchangeSuccessCode;
+    private int pokemonExchangeInvalidCode;
+    private int pokemonExchangeErrorCode;
 }

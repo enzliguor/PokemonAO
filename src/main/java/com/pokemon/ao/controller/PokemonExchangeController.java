@@ -75,7 +75,7 @@ public class PokemonExchangeController {
             if (!this.dtoValidator.isValidPokemonDTO(receivedPokemonDTO)) {
                 log.error("RECEIVED INVALID POKEMON from remote exchange with id: {}", exchangeResponse.getExchangeId());
                 log.error("Sending STATUS CODE 400 to PokemonDAJE");
-                communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(400));
+                communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(customProperties.getPokemonExchangeInvalidCode()));
                 return ResponseEntity.internalServerError().body(pokemonToExchange);
             }
             try {
@@ -85,7 +85,7 @@ public class PokemonExchangeController {
             } catch (Exception exception) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 try {
-                    communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(500));
+                    communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(customProperties.getPokemonExchangeErrorCode()));
                     log.error("COMMUNICATING STATUS CODE 500 TO PokemonDAJE");
                     return ResponseEntity.internalServerError().body(null);
                 } catch (RestClientException e) {
@@ -116,7 +116,7 @@ public class PokemonExchangeController {
         PokemonVO newPokemon = this.pokemonService.save(receivedPokemonVO);
         this.pokemonService.delete(pokemonToExchange.getId());
 
-        communicateStatusExchange(exchangeID, new StatusExchange(200));
+        communicateStatusExchange(exchangeID, new StatusExchange(customProperties.getPokemonExchangeSuccessCode()));
         return newPokemon;
     }
 

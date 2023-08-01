@@ -30,4 +30,5 @@ public class CustomProperties {
     private int pokemonExchangeSuccessCode;
     private int pokemonExchangeInvalidCode;
     private int pokemonExchangeErrorCode;
+    private boolean startWithEmptyPokemonTable;
 }

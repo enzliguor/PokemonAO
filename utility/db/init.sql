@@ -36,6 +36,7 @@ CREATE TABLE pokemon_move(
     pokemon_id INT NOT NULL,
     move_slot VARCHAR(255) NOT NULL,
     move_id INT NOT NULL,
+    PRIMARY KEY (pokemon_id, move_slot),
     FOREIGN KEY (move_id) REFERENCES move (id),
     FOREIGN KEY (pokemon_id) REFERENCES pokemon (id)
 );

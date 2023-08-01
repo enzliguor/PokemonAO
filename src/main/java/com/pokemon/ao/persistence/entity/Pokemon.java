@@ -33,7 +33,7 @@ public class Pokemon implements EntityDB {
     @Column (name = "max_hp")
     protected int maxHp;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "pokemon_move",
             joinColumns = @JoinColumn(name = "pokemon_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "move_id", referencedColumnName = "id")

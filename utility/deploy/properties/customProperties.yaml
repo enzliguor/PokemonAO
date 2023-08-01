@@ -1,9 +1,8 @@
 defaultPokemon:
-  id: 0
   name: 'Gren'
   species:
     id: 7
-    spriteUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
+    spriteUrl: 'https://i.imgur.com/qFcW2hx.png'
     name: 'squirtle'
     type:
       id: 4
@@ -85,4 +84,4 @@ pokemonExchangeInvalidCode: 400
 pokemonExchangeErrorCode: 500
 
 #Populating pokemon table
-startWithEmptyPokemonTable: false
+startWithEmptyPokemonTable: true

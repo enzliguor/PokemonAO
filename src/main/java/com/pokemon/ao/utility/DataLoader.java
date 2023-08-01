@@ -8,6 +8,7 @@ import com.pokemon.ao.dto.SpeciesDTO;
 import com.pokemon.ao.dto.converter.MoveConverterDTO;
 import com.pokemon.ao.dto.converter.SpeciesConverterDTO;
 import com.pokemon.ao.persistence.service.MoveService;
+import com.pokemon.ao.persistence.service.PokemonService;
 import com.pokemon.ao.persistence.service.SpeciesService;
 import com.pokemon.ao.persistence.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,14 @@ public class DataLoader implements ApplicationRunner {
     private final MoveConverterDTO moveConverterDTO;
     private final JdbcTemplate jdbcTemplate;
     private final ResourceLoader resourceLoader;
+    private final PokemonService pokemonService;
     @Value("${path.unknownDataTypeScript}")
     private String unknownDatatypeScriptPath;
+    @Value("${path.insertPokemonDataScript}")
+    private String insertPokemonDataScriptPath;
 
     @Autowired
-    public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO, JdbcTemplate jdbcTemplate, ResourceLoader resourceLoader) {
+    public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO, JdbcTemplate jdbcTemplate, ResourceLoader resourceLoader, PokemonService pokemonService) {
         this.pokemonApi = pokemonApi;
         this.customProperties = customProperties;
         this.speciesService = speciesService;
@@ -52,6 +56,7 @@ public class DataLoader implements ApplicationRunner {
         this.moveConverterDTO = moveConverterDTO;
         this.jdbcTemplate = jdbcTemplate;
         this.resourceLoader = resourceLoader;
+        this.pokemonService = pokemonService;
     }
 
     @Override
@@ -59,9 +64,10 @@ public class DataLoader implements ApplicationRunner {
         loadTypes();
         loadSpecies();
         loadMoves();
-        loadUnknownDataTypes(); }
+        loadUnknownDataTypes();
+        loadPokemon();}
 
-    public void loadTypes() {
+    private void loadTypes() {
         if(!this.typeService.findAll().isEmpty()) return;
         Map<String, String> typeIcons = this.customProperties.getTypeIcons();
         typeIcons.forEach((key, value) -> this.typeService.save(TypeVO
@@ -71,7 +77,7 @@ public class DataLoader implements ApplicationRunner {
                         .build()));
     }
 
-    public void loadSpecies() {
+    private void loadSpecies() {
         if(!this.speciesService.findAll().isEmpty()) return;
         int numberOfSpecies = this.customProperties.getSpeciesCount();
         Set<SpeciesDTO> species = this.pokemonApi.getSpecies(numberOfSpecies);
@@ -80,7 +86,7 @@ public class DataLoader implements ApplicationRunner {
                 .forEach(this.speciesService::save);
     }
 
-    public void loadMoves(){
+    private void loadMoves(){
         if(!this.moveService.findAll().isEmpty()) return;
         int numberOfMoves = this.customProperties.getMovesCount();
         List<TypeVO> types = this.typeService.findAll();
@@ -94,8 +100,23 @@ public class DataLoader implements ApplicationRunner {
         if(containsUnknownDataTypes()){
             return;
         }
+        this.executeScript(this.unknownDatatypeScriptPath);
+    }
+    private boolean containsUnknownDataTypes(){
+        return this.typeService.exists(this.customProperties.getUnknownTypeID()) &&
+                this.moveService.exists(this.customProperties.getUnknownMoveID()) &&
+                this.speciesService.exists(this.customProperties.getUnknownSpeciesID());
+    }
+
+    private void loadPokemon(){
+        if(this.customProperties.isStartWithEmptyPokemonTable() ||
+        !this.pokemonService.findAll().isEmpty()) return;
+        this.executeScript(this.insertPokemonDataScriptPath);
+    }
+
+    private void executeScript(String scriptPath){
         try {
-            Resource resource = resourceLoader.getResource("file:" + this.unknownDatatypeScriptPath);
+            Resource resource = resourceLoader.getResource("file:" + scriptPath);
             String scriptContent = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()), StandardCharsets.UTF_8);
 
             String[] sqlBatch = scriptContent.split(";");
@@ -104,10 +125,5 @@ public class DataLoader implements ApplicationRunner {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    private boolean containsUnknownDataTypes(){
-        return this.typeService.exists(this.customProperties.getUnknownTypeID()) &&
-                this.moveService.exists(this.customProperties.getUnknownMoveID()) &&
-                this.speciesService.exists(this.customProperties.getUnknownSpeciesID());
     }
 }

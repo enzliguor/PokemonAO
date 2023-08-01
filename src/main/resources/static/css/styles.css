@@ -119,7 +119,7 @@ h2{
 }
 
 .gradient-bg {
- background: linear-gradient(180deg, #ffffff, #fcd362);
+    background-image: url("../images/index/card-background.jpg");
 }
 
 #pokemon-container .card:hover {

@@ -56,8 +56,8 @@ function generatePokemonCard(pokemon, index) {
 
     card.innerHTML = `
         <!-- Category Card -->
-            <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em; font-family: 'SF distant Galaxy',sans-serif">
-              <div style="border-bottom: 5px solid #ffcb05 ">
+            <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #c5941c; border-radius: 2em; font-family: 'SF distant Galaxy',sans-serif">
+              <div style="border-bottom: 5px solid #c5941c ">
                 <div class="px-5 pt-2 ad-titl">
                   <h5 id="species-name">${pokemon.species.name.toUpperCase()}</h5>
                   <h6 id="HP">${pokemon.currentHp}/${pokemon.maxHp} HP</h6>
@@ -65,7 +65,7 @@ function generatePokemonCard(pokemon, index) {
                 <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
               </div>
               <div class="d-flex justify-content-center mt-3">
-                <img id="sprites" class="${pokemon.species.type.name}-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
+                <img id="sprites" class="${pokemon.species.type.name}-bg" width="75%" style="border: 5px solid #c5941c" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
               </div>
               <div class="d-flex justify-content-center mt-2">
                 <h5 id="pokemon-name">${pokemon.name}</h5>

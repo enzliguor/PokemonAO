@@ -66,7 +66,10 @@ public class PokemonExchangeController {
             log.error("NEGATIVE RESPONSE RECEIVED from remote exchange");
             return ResponseEntity.internalServerError().body(null);
         }
-
+        if(!response.hasBody()){
+            log.error("HTTP call succeeded, but no response body found");
+            return ResponseEntity.internalServerError().body(null);
+        }
         ExchangeResponse exchangeResponse;
         try {
             exchangeResponse = this.objectMapper.readValue(response.getBody(), ExchangeResponse.class);

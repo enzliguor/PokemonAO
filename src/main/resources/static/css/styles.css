@@ -147,7 +147,7 @@ h2{
     0%, 100% { transform: translateX(0) rotateZ(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) rotateZ(-5deg); }
     20%, 40%, 60%, 80% { transform: translateX(5px) rotateZ(5deg); }
-  }
+}
   
 #pokeball {
     cursor: pointer;
@@ -161,24 +161,6 @@ h2{
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
-}
-
-@keyframes shake {
-    20%, 80% {
-        transform: translate3d(-3px, 0, 0);
-    }
-
-    30%, 70% {
-        transform: translate3d(5px, 0, 0);
-    }
-
-    40%, 60%, 80% {
-        transform: translate3d(-6px, 0, 0);
-    }
-
-    50%, 70% {
-        transform: translate3d(6px, 0, 0);
-    }
 }
 
 .modal-borders-header{

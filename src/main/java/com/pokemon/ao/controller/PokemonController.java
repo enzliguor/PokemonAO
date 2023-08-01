@@ -22,7 +22,7 @@ public class PokemonController {
     private final int teamSize;
 
     @Autowired
-    public PokemonController(PokemonUtility pokemonUtility, CustomProperties customProperties) {
+    private PokemonController(PokemonUtility pokemonUtility, CustomProperties customProperties) {
         this.pokemonUtility = pokemonUtility;
         this.teamSize = customProperties.getTeamSize();
 

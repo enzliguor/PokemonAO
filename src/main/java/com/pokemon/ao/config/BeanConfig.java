@@ -2,6 +2,8 @@ package com.pokemon.ao.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,7 @@ import java.io.IOException;
 
 @Configuration
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BeanConfig {
     @Value("${path.customProperties}")
     private String customPropertiesPath;

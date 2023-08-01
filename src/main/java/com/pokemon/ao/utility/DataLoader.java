@@ -46,7 +46,7 @@ public class DataLoader implements ApplicationRunner {
     private String insertPokemonDataScriptPath;
 
     @Autowired
-    public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO, JdbcTemplate jdbcTemplate, ResourceLoader resourceLoader, PokemonService pokemonService) {
+    private DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO, JdbcTemplate jdbcTemplate, ResourceLoader resourceLoader, PokemonService pokemonService) {
         this.pokemonApi = pokemonApi;
         this.customProperties = customProperties;
         this.speciesService = speciesService;

@@ -23,7 +23,7 @@ public class PokemonConverterDTO implements ConverterDTO<PokemonDTO, PokemonVO> 
     private final CustomProperties customProperties;
 
     @Autowired
-    public PokemonConverterDTO(SpeciesService speciesService, MoveService moveService, CustomProperties customProperties) {
+    private PokemonConverterDTO(SpeciesService speciesService, MoveService moveService, CustomProperties customProperties) {
         this.speciesService = speciesService;
         this.moveService = moveService;
         this.customProperties = customProperties;

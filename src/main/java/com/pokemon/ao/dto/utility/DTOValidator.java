@@ -12,7 +12,7 @@ public class DTOValidator {
     private final CustomProperties customProperties;
 
     @Autowired
-    public DTOValidator(CustomProperties customProperties) {
+    private DTOValidator(CustomProperties customProperties) {
         this.customProperties = customProperties;
     }
 

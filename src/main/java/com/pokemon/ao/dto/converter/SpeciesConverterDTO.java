@@ -3,14 +3,15 @@ package com.pokemon.ao.dto.converter;
 import com.pokemon.ao.domain.SpeciesVO;
 import com.pokemon.ao.dto.SpeciesDTO;
 import com.pokemon.ao.persistence.service.TypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SpeciesConverterDTO implements ConverterDTO <SpeciesDTO, SpeciesVO> {
 
     private final TypeService typeService;
-
-    public SpeciesConverterDTO(TypeService typeService) {
+    @Autowired
+    private SpeciesConverterDTO(TypeService typeService) {
         this.typeService = typeService;
     }
 

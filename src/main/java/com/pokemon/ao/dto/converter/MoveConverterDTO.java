@@ -12,7 +12,7 @@ public class MoveConverterDTO implements ConverterDTO<MoveDTO, MoveVO> {
     private final TypeService typeService;
 
     @Autowired
-    public MoveConverterDTO(TypeService typeService) {
+    private MoveConverterDTO(TypeService typeService) {
         this.typeService = typeService;
     }
 

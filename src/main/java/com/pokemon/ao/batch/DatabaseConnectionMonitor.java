@@ -18,7 +18,7 @@ public class DatabaseConnectionMonitor {
     private final DataSource dataSource;
 
     @Autowired
-    public DatabaseConnectionMonitor(DataSource dataSource) {
+    private DatabaseConnectionMonitor(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

@@ -20,7 +20,7 @@ public class PokemonUtility {
     private final CustomProperties customProperties;
 
     @Autowired
-    public PokemonUtility(PokemonService pokemonService, CustomProperties defaultPokemon) {
+    private PokemonUtility(PokemonService pokemonService, CustomProperties defaultPokemon) {
         this.pokemonService = pokemonService;
         this.customProperties = defaultPokemon;
     }

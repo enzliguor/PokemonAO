@@ -17,7 +17,7 @@ public class PokemonMarshaller implements Marshaller<PokemonVO, Pokemon> {
     private final SpeciesMarshaller speciesMarshaller;
     private final UnknownPokemonMarshaller unknownPokemonMarshaller;
     @Autowired
-    public PokemonMarshaller(MoveMarshaller moveMarshaller, SpeciesMarshaller speciesMarshaller, UnknownPokemonMarshaller unknownPokemonMarshaller) {
+    private PokemonMarshaller(MoveMarshaller moveMarshaller, SpeciesMarshaller speciesMarshaller, UnknownPokemonMarshaller unknownPokemonMarshaller) {
         this.moveMarshaller = moveMarshaller;
         this.speciesMarshaller = speciesMarshaller;
         this.unknownPokemonMarshaller = unknownPokemonMarshaller;

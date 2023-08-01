@@ -118,78 +118,6 @@ h2{
     background-size: 140%;
 }
 
-.bug-gradient-bg {
- background: linear-gradient(45deg, #1c4b27, #3c9950);
-}
-
-.poison-gradient-bg {
-    background: linear-gradient(45deg, #5e2d89, #9b69da);
-}
-
-.steel-gradient-bg {
-    background: linear-gradient(45deg, #60756e, #42be94);
-}
-
-.fire-gradient-bg {
- background: linear-gradient(45deg, #ac1d27, #fc4c59);
-}
-
-.water-gradient-bg {
- background: linear-gradient(45deg, #99CCFF, #66A3FF);
-}
-
-.electric-gradient-bg {
- background: linear-gradient(45deg, #e2e42b, #f9fa72);
-}
-
-.grass-gradient-bg {
- background: linear-gradient(45deg, #167b3d, #25cb53);
-}
-
-.psychic-gradient-bg {
-    background: linear-gradient(45deg, #a42a6b, #f71e93);
-}
-
-.normal-gradient-bg {
-    background: linear-gradient(45deg, #74535a, #c999a7);
-}
-
-.ice-gradient-bg {
-    background: linear-gradient(45deg, #87d1f5, #d8f1fc);
-}
-
-.ghost-gradient-bg {
-    background: linear-gradient(45deg, #32336b, #906791);
-}
-
-.flying-gradient-bg {
-    background: linear-gradient(45deg, #4b677d, #93b2c7);
-}
-
-.fighting-gradient-bg {
-    background: linear-gradient(45deg, #9a4026, #ef6139);
-}
-
-.fairy-gradient-bg {
-    background: linear-gradient(45deg, #971946, #e81467);
-}
-
-.dragon-gradient-bg {
-    background: linear-gradient(45deg, #448a94, #62cbd8);
-}
-
-.dark-gradient-bg {
-    background: linear-gradient(45deg, #030708, #595a78);
-}
-
-.rock-gradient-bg {
-    background: linear-gradient(45deg, #49180a, #8b3e22);
-}
-
-.ground-gradient-bg {
-    background: linear-gradient(45deg, #a7702d, #6e491f);
-}
-
 .gradient-bg {
  background: linear-gradient(180deg, #ffffff, #fcd362);
 }
@@ -294,8 +222,23 @@ h2{
         transform: rotate(0deg);
     }
     to {
-        transform: rotate(359deg);
+        transform: rotate(360deg);
     }
 }
 
+@keyframes slideUp {
+    0%{
+        opacity: 1;
+        transform: translateY(0%);
 
+    }
+    100%{
+        display: none;
+        opacity: 0;
+        transform: translateY(-200%);
+    }
+}
+
+.slideUp{
+    animation: slideUp 2s;
+}

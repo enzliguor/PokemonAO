@@ -18,7 +18,7 @@ async function fetchRandomTeam() {
     pokeball.src = '../static/images/index/Opened-pokeball.png';
     document.body.style.backgroundImage = "url('../static/images/index/flash.jpg')";
     // Dopo 0,3 secondi, cambia lo sfondo e nasconde la pokeball e invoca l'api
-    setTimeout( async function () {
+    setTimeout(async function () {
         pokeball.style.display = 'none';
         document.body.style.backgroundImage = "url('../static/images/index/pokedex.jpg')"; // Ripristina lo sfondo predefinito
 
@@ -31,7 +31,6 @@ async function fetchRandomTeam() {
             console.error('Errore durante la fetch:', error);
         }
     }, 300);
-
 }
 
 function createMovesMarkup(moves) {
@@ -48,7 +47,7 @@ function createMovesMarkup(moves) {
 
 function getRandomIndexFromPokemonTeam() {
     const randomizedNumber = Math.random();
-    return  Math.floor( randomizedNumber * (pokemonTeam.length - 1));
+    return Math.floor(randomizedNumber * (pokemonTeam.length - 1));
 }
 
 function generatePokemonCard(pokemon, index) {
@@ -57,36 +56,36 @@ function generatePokemonCard(pokemon, index) {
 
     card.innerHTML = `
         <!-- Category Card -->
-        <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em; font-family: 'SF distant Galaxy',sans-serif">
-          <div style="border-bottom: 5px solid #ffcb05 ">
-            <div class="px-5 pt-2 ad-titl">
-                <h5 id="species-name" class="font-weight-bold">${pokemon.species.name.toUpperCase()}</h5>
-                <h6 id="HP">${pokemon.currentHp}/${pokemon.maxHp} HP</h6>
-            </div>
-            <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
-          </div>
-          <div class="d-flex justify-content-center mt-3">
-            <img id="sprites" class="${pokemon.species.type.name}-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
-          </div>
-          <div class="d-flex justify-content-center mt-2">
-            <h5 id="pokemon-name">${pokemon.name}</h5>
-          </div>
-          <div id="moves" class="card-body" style="height: 200px">
-            <ul class="list-group">
-              <!-- Ciclo for per creare dinamicamente le mosse del Pokémon -->
-              ${createMovesMarkup(pokemon.moves)}
-            </ul>
-          </div>
-          <div class="d-flex justify-content-center pokemon-trainer">
-            <p>${pokemon.originalTrainer}</p>
-          </div>
-        </div>   
+            <div id="pokemon-${index}" class="card gradient-bg" style="border: 10px solid #ffcb05; border-radius: 2em; font-family: 'SF distant Galaxy',sans-serif">
+              <div style="border-bottom: 5px solid #ffcb05 ">
+                <div class="px-5 pt-2 ad-titl">
+                  <h5 id="species-name">${pokemon.species.name.toUpperCase()}</h5>
+                  <h6 id="HP">${pokemon.currentHp}/${pokemon.maxHp} HP</h6>
+                </div>
+                <img id="icon-type" class="icon-type" src="${pokemon.species.type.icon}" alt="Alternate Text" />
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <img id="sprites" class="${pokemon.species.type.name}-bg" width="75%" style="border: 5px solid #ffcb05" src="${pokemon.species.spriteUrl}" alt="Alternate Text" />
+              </div>
+              <div class="d-flex justify-content-center mt-2">
+                <h5 id="pokemon-name">${pokemon.name}</h5>
+              </div>
+              <div id="moves" class="card-body" style="height: 200px">
+                <ul class="list-group">
+                  <!-- Ciclo for per creare dinamicamente le mosse del Pokémon -->
+                  ${createMovesMarkup(pokemon.moves)}
+                </ul>
+              </div>
+              <div class="d-flex justify-content-center pokemon-trainer">
+                <p>${pokemon.originalTrainer}</p>
+              </div>
+            </div>       
       `;
 
     pokemonContainer.appendChild(card);
 }
 
-function updatePokemonTeamView(){
+function updatePokemonTeamView() {
     while (pokemonContainer.firstChild) {
         pokemonContainer.removeChild(pokemonContainer.firstChild);
     }
@@ -106,6 +105,7 @@ async function exchangePokemon() {
             pokemon.id === selectedPokemon.id ? exchangedPokemon : pokemon
         );
         const cardToRemove = document.getElementById("pokemon-" + randomizedIndex);
+        cardToRemove.classList.add("slideUp");
         pokemonContainer.removeChild(cardToRemove);
         updatePokemonTeamView();
     } else {

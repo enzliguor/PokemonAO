@@ -2,28 +2,25 @@ defaultPokemon:
   id: 0
   name: 'Gren'
   species:
-    id: 0
+    id: 7
     spriteUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
     name: 'squirtle'
     type:
-      id: 0
+      id: 4
       name: 'water'
       icon: 'https://i.imgur.com/AITT6dU.png'
   currentHp: 100
   maxHp: 100
   moves:
     SLOT_1:
-      id: 0
-      name: 'idropompa'
+      id: 29
+      name: 'hydro-pump'
       type:
-        id: 0
+        id: 4
         name: 'water'
         icon: 'https://i.imgur.com/AITT6dU.png'
-      power: 10
-  originalTrainer: 'Sgarbi'
-
-#Unknown Data Type Script Path
-unknownDataTypeScriptPath: 'C:\Users\vliguori\Desktop\PokemonAO\utility\db\unknownDataType.sql'
+      power: 110
+  originalTrainer: 'default'
 
 #Unknown Species ID:
 unknownSpeciesID: 10000
@@ -38,8 +35,8 @@ unknownTypeID: 10000
 defaultMoveID: 1
 
 #Daje URL
-pokemonDajeExchangeUrl: 'html://localhost:8080/api/pokemon/exchange'
-pokemonDajeStatusExchangeUrl: 'html://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
+pokemonDajeExchangeUrl: 'http://localhost:8080/api/pokemon/exchange'
+pokemonDajeStatusExchangeUrl: 'http://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
 
 #API Pokemon.co
 pokemonApiSpeciesUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
@@ -82,3 +79,10 @@ minMovesPerPokemon: 1
 #Team random size
 teamSize: 6
 
+#PokemonExchangeCodes
+pokemonExchangeSuccessCode: 200
+pokemonExchangeInvalidCode: 400
+pokemonExchangeErrorCode: 500
+
+#Populating pokemon table
+startWithEmptyPokemonTable: false

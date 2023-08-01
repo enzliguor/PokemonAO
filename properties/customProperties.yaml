@@ -83,3 +83,6 @@ teamSize: 6
 pokemonExchangeSuccessCode: 200
 pokemonExchangeInvalidCode: 400
 pokemonExchangeErrorCode: 500
+
+#Populating pokemon table
+startWithEmptyPokemonTable: true

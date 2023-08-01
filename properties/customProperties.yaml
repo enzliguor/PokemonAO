@@ -2,7 +2,7 @@ defaultPokemon:
   id: 0
   name: 'Gren'
   species:
-    id: 10
+    id: 7
     spriteUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
     name: 'squirtle'
     type:
@@ -13,17 +13,14 @@ defaultPokemon:
   maxHp: 100
   moves:
     SLOT_1:
-      id: 1
-      name: 'surf'
+      id: 29
+      name: 'hydro-pump'
       type:
         id: 4
         name: 'water'
         icon: 'https://i.imgur.com/AITT6dU.png'
-      power: 90
+      power: 110
   originalTrainer: 'default'
-
-#Unknown Data Type Script Path
-unknownDataTypeScriptPath: 'C:\Users\vliguori\Desktop\PokemonAO\utility\db\unknownDataType.sql'
 
 #Unknown Species ID:
 unknownSpeciesID: 10000

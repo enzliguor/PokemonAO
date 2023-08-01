@@ -62,6 +62,11 @@ public class PokemonExchangeController {
         }
 
         ResponseEntity<String> response = callRemoteExchange(pokemonToExchangeDTO);
+        if(!response.getStatusCode().is2xxSuccessful()) {
+            log.error("NEGATIVE RESPONSE RECEIVED from remote exchange");
+            return ResponseEntity.internalServerError().body(null);
+        }
+
         ExchangeResponse exchangeResponse;
         try {
             exchangeResponse = this.objectMapper.readValue(response.getBody(), ExchangeResponse.class);
@@ -69,7 +74,6 @@ public class PokemonExchangeController {
             log.error("UNEXPECTED DATA FROM PokemonDAJE");
             return ResponseEntity.internalServerError().body(pokemonToExchange);
         }
-        if (exchangeResponse != null) {
             PokemonDTO receivedPokemonDTO = exchangeResponse.getPokemon();
 
             if (!this.dtoValidator.isValidPokemonDTO(receivedPokemonDTO)) {
@@ -93,9 +97,6 @@ public class PokemonExchangeController {
                     return ResponseEntity.internalServerError().body(null);
                 }
             }
-        }
-        log.error("NEGATIVE RESPONSE RECEIVED from remote exchange");
-        return ResponseEntity.internalServerError().body(null);
     }
 
     private ResponseEntity<String> callRemoteExchange(PokemonDTO pokemonToExchangeDTO) {

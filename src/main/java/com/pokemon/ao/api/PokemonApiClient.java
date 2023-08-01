@@ -29,6 +29,7 @@ public class PokemonApiClient {
     }
     public Set<SpeciesDTO> getSpecies(int numberOfSpecies) {
         return    IntStream.rangeClosed(1, numberOfSpecies)
+                .parallel()
                 .mapToObj(speciesID -> invokeApi("https://pokeapi.co/api/v2/pokemon/{id}", Map.class, speciesID))
                 .filter(Objects::nonNull)
                 .map(jsonResponse -> SpeciesDTO.builder()

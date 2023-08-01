@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @Configuration
 @Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BeanConfig {
     @Value("${path.customProperties}")
     private String customPropertiesPath;

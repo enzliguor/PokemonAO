@@ -38,7 +38,7 @@ public class PokemonExchangeController {
     private final ObjectMapper objectMapper;
 
     @Autowired
-    private PokemonExchangeController(RestTemplate restTemplate, PokemonService pokemonService, PokemonConverterDTO pokemonConverterDTO, DTOValidator dtoValidator, CustomProperties customProperties, ObjectMapper objectMapper) {
+    protected PokemonExchangeController(RestTemplate restTemplate, PokemonService pokemonService, PokemonConverterDTO pokemonConverterDTO, DTOValidator dtoValidator, CustomProperties customProperties, ObjectMapper objectMapper) {
         this.restTemplate = restTemplate;
         this.pokemonService = pokemonService;
         this.pokemonConverterDTO = pokemonConverterDTO;

@@ -11,6 +11,7 @@ import com.pokemon.ao.persistence.service.MoveService;
 import com.pokemon.ao.persistence.service.SpeciesService;
 import com.pokemon.ao.persistence.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.Resource;
@@ -37,6 +38,8 @@ public class DataLoader implements ApplicationRunner {
     private final MoveConverterDTO moveConverterDTO;
     private final JdbcTemplate jdbcTemplate;
     private final ResourceLoader resourceLoader;
+    @Value("${path.unknownDataTypeScript}")
+    private String unknownDatatypeScriptPath;
 
     @Autowired
     public DataLoader(PokemonApiClient pokemonApi, CustomProperties customProperties, SpeciesService speciesService, TypeService typeService, SpeciesConverterDTO speciesConverterDTO, MoveService moveService, MoveConverterDTO moveConverterDTO, JdbcTemplate jdbcTemplate, ResourceLoader resourceLoader) {
@@ -92,7 +95,7 @@ public class DataLoader implements ApplicationRunner {
             return;
         }
         try {
-            Resource resource = resourceLoader.getResource("file:" + this.customProperties.getUnknownDataTypeScriptPath());
+            Resource resource = resourceLoader.getResource("file:" + this.unknownDatatypeScriptPath);
             String scriptContent = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()), StandardCharsets.UTF_8);
 
             String[] sqlBatch = scriptContent.split(";");

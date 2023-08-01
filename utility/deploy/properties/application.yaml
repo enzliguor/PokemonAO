@@ -1,0 +1,22 @@
+#SPRING
+spring:
+  datasource:
+    username: 'root'
+    url: 'jdbc:mysql://pokemon_ao_db:3306/pokemon_ao_db'
+    password: 'root'
+    hikari:
+      initializationFailTimeout: 0
+  jpa:
+    properties:
+      hibernate:
+        dialect: 'org.hibernate.dialect.MySQLDialect'
+        ddl-auto: 'validate'
+
+#SERVER
+server:
+  port: 8080
+
+#BATCH
+batch:
+  databaseConnectionMonitor:
+    fixedDelay: 60000

@@ -15,12 +15,12 @@ function hyphenToTitleCase(inputString) {
 }
 
 async function fetchRandomTeam() {
-    pokeball.src = '../static/images/index/Opened-pokeball.png';
-    document.body.style.backgroundImage = "url('../static/images/index/flash.jpg')";
+    pokeball.src = '../images/index/Opened-pokeball.png';
+    document.body.style.backgroundImage = "url('../images/index/flash.jpg')";
     // Dopo 0,3 secondi, cambia lo sfondo e nasconde la pokeball e invoca l'api
     setTimeout(async function () {
         pokeball.style.display = 'none';
-        document.body.style.backgroundImage = "url('../static/images/index/pokedex.jpg')"; // Ripristina lo sfondo predefinito
+        document.body.style.backgroundImage = "url('../images/index/pokedex.jpg')"; // Ripristina lo sfondo predefinito
 
         try {
             const response = await fetch('http://localhost:8080/api/pokemon/random-team');
@@ -34,7 +34,7 @@ async function fetchRandomTeam() {
 }
 
 function createMovesMarkup(moves) {
-    return moves.map(move => `
+    return Object.values(moves).map(move => `
       <ul class="list-inline px-4 d-flex justify-content-between mt-2">
               <li class="list-inline-item">
                   <img width="30px" height="30px" src="${move.type.icon}" alt="Alternate Text" />
@@ -106,10 +106,12 @@ async function exchangePokemon() {
         );
         const cardToRemove = document.getElementById("pokemon-" + randomizedIndex);
         cardToRemove.classList.add("slideUp");
-        pokemonContainer.removeChild(cardToRemove);
-        updatePokemonTeamView();
+        setTimeout(async function () {
+            updatePokemonTeamView();
+        }, 1000);
+
     } else {
-        console.log("Errore nello scambio del Pokemon, lancio modale errore");
+        console.log("Pokemon Exchange Error");
         pokemonContainer.appendChild(modalError);
         $('#errorMessageModal').modal('show');
     }

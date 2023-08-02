@@ -1,0 +1,24 @@
+version: "3"
+services:
+  pokemon_ao_db:
+    image: hadows/pokemon_ao_db:2.1
+    container_name: pokemon_ao_db
+    networks:
+      - common
+    ports:
+      - "3310:3306"
+
+  pokemon_ao_application:
+    image: hadows/pokemon_ao_application:1.1
+    container_name: pokemon_ao_application
+    volumes:
+      - ./properties/customProperties.yaml:/home/properties/customProperties.yaml
+      - ./properties/application.yaml:/home/properties/application.yaml
+    networks:
+      - common
+    ports:
+      - "8080:8080"
+
+networks:
+  common:
+    name: common

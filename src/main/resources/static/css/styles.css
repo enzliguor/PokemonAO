@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+ font-family: 'Montserrat', sans-serif;
+ background-image: url('../images/index/pokemon-mystery-dungeon-squadra-soccorso-dx-recensione-cover-1620x800.jpg');
+ background-size: cover;
+ background-repeat: no-repeat;
+}
+
+.trade-section {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: #ffcb05;
+    cursor: pointer;
+}
+
+h2{
+    -webkit-text-stroke: 2px #2262a8;
+}
+
+.bug-bg {
+    background-image: url("../images/type-bg/bug.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.dark-bg {
+    background-image: url("../images/type-bg/dark.jpg");
+    background-size: 140%;
+    background-position-x: 50%;
+}
+
+.dragon-bg {
+    background-image: url("../images/type-bg/dragon.jpg");
+    background-size: 160%;
+}
+
+.electric-bg {
+    background-image: url("../images/type-bg/electric.jpg");
+    background-position-x: 50%;
+}
+
+.fairy-bg {
+    background-image: url("../images/type-bg/fairy.jpg");
+    background-size: 100%;
+}
+
+.fighting-bg {
+    background-image: url("../images/type-bg/fighting.jpg");
+    background-size: 200%;
+    background-position-x: 50%;
+}
+
+.fire-bg {
+    background-image: url("../images/type-bg/fire.jpg");
+    background-size: 160%;
+    background-position-y: 100%;
+}
+
+.flying-bg {
+    background-image: url("../images/type-bg/flying.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.ghost-bg {
+    background-image: url("../images/type-bg/ghost.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.grass-bg {
+    background-image: url("../images/type-bg/grass.jpg");
+    background-size: 100%;
+    background-position-x: 50%;
+}
+
+.ground-bg {
+    background-image: url("../images/type-bg/ground.jpg");
+    background-size: 180%;
+    background-position-x: 50%;
+}
+
+.ice-bg {
+    background-image: url("../images/type-bg/ice.jpg");
+    background-size: 160%;
+    background-position-x: 50%;
+}
+
+.normal-bg {
+    background-image: url("../images/type-bg/normal.jpg");
+    background-size: 160%;
+}
+
+.poison-bg {
+    background-image: url("../images/type-bg/poison.jpg");
+    background-size: 200%;
+    background-position-x: 50%;
+}
+
+.psychic-bg {
+    background-image: url("../images/type-bg/psychic.jpg");
+    background-size: 140%;
+}
+
+.rock-bg {
+    background-image: url("../images/type-bg/rock.jpg");
+    background-size: 110%;
+}
+
+.steel-bg {
+    background-image: url("../images/type-bg/steel.jpg");
+    background-size: 140%;
+}
+
+.water-bg {
+    background-image: url("../images/type-bg/water.jpg");
+    background-size: 140%;
+}
+
+.gradient-bg {
+    background-image: url("../images/index/card-background.jpg");
+}
+
+#pokemon-container .card:hover {
+ box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+ border-radius: 2em;
+ transition: all 0.3s ease;
+ transform: scale(1.3);
+ z-index: 1;
+}
+
+#pokemon-container .ad-title h5 {
+ text-transform: uppercase;
+ font-size: 22px;
+}
+
+.pokemon-trainer {
+ font-size: 20px;
+}
+
+.move-font-size {
+    font-size: 100%;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0) rotateZ(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) rotateZ(-5deg); }
+    20%, 40%, 60%, 80% { transform: translateX(5px) rotateZ(5deg); }
+}
+  
+#pokeball {
+    cursor: pointer;
+    animation: shake 2s infinite;
+    height: auto;
+    max-width: 25%;
+}
+
+.errorMessageModal:hover {
+    animation: shake 0.90s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.modal-borders-header{
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+}
+
+.modal-borders-content{
+    border-radius: 30px !important;
+}
+
+.body-modal-font-size{
+    font-size: 18px;
+}
+
+.icon-type {
+
+    width: 27%;
+    position: absolute; /* Abilita il posizionamento assoluto */
+    top: -1px; /* Spazio di 10px dalla parte superiore della card */
+    right: -1px; /* Spazio di 10px dalla parte destra della card */
+    border-radius: 50%; /* Imposta il bordo circolare */
+}
+
+.bounce-1 {
+    animation: bounce-1 1s infinite;
+}
+
+.bounce-1:hover{
+    animation: rotation 2s infinite;
+}
+
+@keyframes bounce-1 {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideUp {
+    0%{
+        opacity: 1;
+        transform: translateY(0%);
+
+    }
+    100%{
+        display: none;
+        opacity: 0;
+        transform: translateY(-200%);
+    }
+}
+
+.slideUp{
+    animation: slideUp 2s;
+}

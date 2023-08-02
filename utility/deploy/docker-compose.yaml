@@ -9,7 +9,7 @@ services:
       - "3310:3306"
 
   pokemon_ao_application:
-    image: hadows/pokemon_ao_application:0.1
+    image: hadows/pokemon_ao_application:1.0
     container_name: pokemon_ao_application
     volumes:
       - ./properties/customProperties.yaml:/home/properties/customProperties.yaml

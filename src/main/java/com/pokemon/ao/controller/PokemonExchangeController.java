@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -58,11 +59,11 @@ public class PokemonExchangeController {
         PokemonDTO pokemonToExchangeDTO = this.pokemonConverterDTO.convertFromVOToDTO(pokemonToExchange);
         if (!this.dtoValidator.isValidPokemonDTO(pokemonToExchangeDTO)) {
             log.error("Trying to exchange INVALID POKEMON with id: {}", id);
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.internalServerError().build();
         }
 
         ResponseEntity<String> response = callRemoteExchange(pokemonToExchangeDTO);
-        if(!response.getStatusCode().is2xxSuccessful()) {
+        if(!response.getStatusCode().equals(HttpStatusCode.valueOf(200))) {
             log.error("NEGATIVE RESPONSE RECEIVED from remote exchange");
             return ResponseEntity.internalServerError().body(null);
         }
@@ -74,15 +75,16 @@ public class PokemonExchangeController {
         try {
             exchangeResponse = this.objectMapper.readValue(response.getBody(), ExchangeResponse.class);
         } catch (JsonProcessingException e) {
-            log.error("UNEXPECTED DATA FROM PokemonDAJE");
+            log.error("UNEXPECTED DATA FROM PokemonDAJE", e);
             return ResponseEntity.internalServerError().body(pokemonToExchange);
         }
             PokemonDTO receivedPokemonDTO = exchangeResponse.getPokemon();
 
             if (!this.dtoValidator.isValidPokemonDTO(receivedPokemonDTO)) {
                 log.error("RECEIVED INVALID POKEMON from remote exchange with id: {}", exchangeResponse.getExchangeId());
-                log.error("Sending STATUS CODE 400 to PokemonDAJE");
-                communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(customProperties.getPokemonExchangeInvalidCode()));
+                int invalidStatusCode = customProperties.getPokemonExchangeInvalidCode();
+                log.error("Sending STATUS CODE {} to PokemonDAJE", invalidStatusCode);
+                communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(invalidStatusCode));
                 return ResponseEntity.internalServerError().body(null);
             }
             try {
@@ -92,11 +94,12 @@ public class PokemonExchangeController {
             } catch (Exception exception) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 try {
-                    communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(customProperties.getPokemonExchangeErrorCode()));
-                    log.error("COMMUNICATING STATUS CODE 500 TO PokemonDAJE");
+                    int errorCode = customProperties.getPokemonExchangeErrorCode();
+                    communicateStatusExchange(exchangeResponse.getExchangeId(), new StatusExchange(errorCode));
+                    log.error("COMMUNICATING STATUS CODE {} TO PokemonDAJE", errorCode);
                     return ResponseEntity.internalServerError().body(null);
                 } catch (RestClientException e) {
-                    log.error("ERROR TRYING TO COMMUNICATE STATUS EXCHANGE TO PokemonDAJE {}", e.getMessage());
+                    log.error("ERROR TRYING TO COMMUNICATE STATUS EXCHANGE TO PokemonDAJE", e);
                     return ResponseEntity.internalServerError().body(null);
                 }
             }
@@ -108,8 +111,7 @@ public class PokemonExchangeController {
         try {
             response = restTemplate.postForEntity(pokemonDajeExchangeUrl, pokemonToExchangeDTO, String.class);
         } catch (RestClientException e) {
-            log.error("ERROR CALLING {}", pokemonDajeExchangeUrl);
-            log.error(e.getMessage());
+            log.error("ERROR CALLING {}", pokemonDajeExchangeUrl, e);
             return ResponseEntity.internalServerError().body(null);
         }
         return response;
@@ -119,8 +121,9 @@ public class PokemonExchangeController {
         PokemonVO receivedPokemonVO = this.pokemonConverterDTO.convertFromDTOToVO(receivedPokemonDTO);
         PokemonVO newPokemon = this.pokemonService.save(receivedPokemonVO);
         this.pokemonService.delete(pokemonToExchange.getId());
-        log.error("COMMUNICATING STATUS CODE 200 TO PokemonDAJE");
-        communicateStatusExchange(exchangeID, new StatusExchange(customProperties.getPokemonExchangeSuccessCode()));
+        int successCode = customProperties.getPokemonExchangeSuccessCode();
+        log.error("COMMUNICATING STATUS CODE {} TO PokemonDAJE", successCode);
+        communicateStatusExchange(exchangeID, new StatusExchange(successCode));
         return newPokemon;
     }
 

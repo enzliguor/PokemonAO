@@ -25,7 +25,7 @@ public class PokemonUtility {
         this.customProperties = defaultPokemon;
     }
 
-    public List<PokemonVO> getRandomPokemons(int pokemonToRetrieve) {
+    public List<PokemonVO> getRandomPokemon(int pokemonToRetrieve) {
         List<PokemonVO> pokemonList = new ArrayList<>();
         List<Integer> idList = pokemonService.findAllIds();
         try {

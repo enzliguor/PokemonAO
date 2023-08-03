@@ -30,7 +30,7 @@ public class PokemonController {
 
     @GetMapping("/random-team")
     public ResponseEntity<List<PokemonVO>> getRandomTeam() {
-        List<PokemonVO> randomTeam = pokemonUtility.getRandomPokemons(teamSize);
+        List<PokemonVO> randomTeam = pokemonUtility.getRandomPokemon(teamSize);
         return new ResponseEntity<>(randomTeam, HttpStatus.OK);
     }
 }

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -26,28 +24,34 @@ public class PokemonUtility {
     }
 
     public List<PokemonVO> getRandomPokemon(int pokemonToRetrieve) {
-        List<PokemonVO> pokemonList = new ArrayList<>();
+        List<PokemonVO> pokemonTeam = new ArrayList<>();
         List<Integer> idList = pokemonService.findAllIds();
-        try {
-            if (pokemonToRetrieve < idList.size()) {
-                Random rand = SecureRandom.getInstanceStrong();
-                while (pokemonList.size() < pokemonToRetrieve) {
-                    int n = rand.nextInt(idList.size());
-                    PokemonVO pokemon = pokemonService.findById(idList.get(n));
-                    pokemonList.add(pokemon);
-                    idList.remove(n);
-                }
-            }else if(!idList.isEmpty()){
-                pokemonList = pokemonService.findAll();
-            }else{
-                PokemonVO defaultPokemon = this.customProperties.getDefaultPokemon();
-                PokemonVO savedPokemon = this.pokemonService.save(defaultPokemon);
-                pokemonList.add(savedPokemon);
-            }
-        }catch(NoSuchAlgorithmException e) {
-            log.error("Error getting random Pokemon {}", e.getMessage ());
-            pokemonList.add(customProperties.getDefaultPokemon());
+
+        if (idList.isEmpty()) {
+            return this.getDefaultTeam();
         }
-        return pokemonList;
+        if (idList.size() <= pokemonToRetrieve) {
+             return pokemonService.findAll();
+        }
+        Random random = null;
+        try {
+            random = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            log.error("Error getting random Pokemon", e);
+            return this.getDefaultTeam();
+        }
+        while (pokemonTeam.size() < pokemonToRetrieve) {
+            int n = random.nextInt(idList.size());
+            PokemonVO pokemon = pokemonService.findById(idList.get(n));
+            pokemonTeam.add(pokemon);
+            idList.remove(n);
+        }
+        return pokemonTeam;
+    }
+
+    private List<PokemonVO> getDefaultTeam(){
+        PokemonVO defaultPokemon = this.customProperties.getDefaultPokemon();
+        PokemonVO savedPokemon = this.pokemonService.save(defaultPokemon);
+        return List.of(savedPokemon);
     }
 }

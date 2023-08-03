@@ -41,8 +41,8 @@ public class PokemonUtility {
                 pokemonList = pokemonService.findAll();
             }else{
                 PokemonVO defaultPokemon = this.customProperties.getDefaultPokemon();
-                pokemonList.add(defaultPokemon);
-                this.pokemonService.save(defaultPokemon);
+                PokemonVO savedPokemon = this.pokemonService.save(defaultPokemon);
+                pokemonList.add(savedPokemon);
             }
         }catch(NoSuchAlgorithmException e) {
             log.error("Error getting random Pokemon {}", e.getMessage ());

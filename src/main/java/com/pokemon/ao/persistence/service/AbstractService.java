@@ -36,7 +36,7 @@ public abstract class AbstractService<V extends ValueObject, E extends EntityDB,
         return e.map(this.marshaller::unmarshall).orElse(null);
     }
 
-    public void delete(ID id){
+    public void deleteByID(ID id){
         if(id == null){
             return;
         }

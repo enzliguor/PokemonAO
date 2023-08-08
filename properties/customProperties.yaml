@@ -34,8 +34,9 @@ unknownTypeID: 10000
 defaultMoveID: 1
 
 #Daje URL
-pokemonDajeExchangeUrl: 'http://localhost:8080/api/pokemon/exchange'
-pokemonDajeStatusExchangeUrl: 'http://localhost:8080/api/pokemon/exchange/{exchange-id}/status'
+pokemonDajeBaseUrl: 'http://localhost:8081'
+pokemonDajeExchangeUrl: '/api/pokemon/exchange'
+pokemonDajeStatusExchangeUrl: '/api/pokemon/exchange/{exchange-id}/status'
 
 #API Pokemon.co
 pokemonApiSpeciesUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'

@@ -79,10 +79,5 @@ minMovesPerPokemon: 1
 #Team random size
 teamSize: 6
 
-#PokemonExchangeCodes
-pokemonExchangeSuccessCode: 200
-pokemonExchangeInvalidCode: 400
-pokemonExchangeErrorCode: 500
-
 #Populating pokemon table
 startWithEmptyPokemonTable: true

@@ -21,6 +21,7 @@ public class CustomProperties {
     private String pokemonDajeStatusExchangeUrl;
     private int maxMovesPerPokemon;
     private int minMovesPerPokemon;
+    private String pokemonApiBaseUrl;
     private String pokemonApiSpeciesUrl;
     private String pokemonApiMovesUrl;
     private String pokemonApiTypesUrl;

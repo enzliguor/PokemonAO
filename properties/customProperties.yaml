@@ -39,9 +39,10 @@ pokemonDajeExchangeUrl: '/api/pokemon/exchange'
 pokemonDajeStatusExchangeUrl: '/api/pokemon/exchange/{exchange-id}/status'
 
 #API Pokemon.co
-pokemonApiSpeciesUrl: 'https://pokeapi.co/api/v2/pokemon/{id}'
-pokemonApiMovesUrl: 'https://pokeapi.co/api/v2/move/{name}'
-pokemonApiTypesUrl: 'https://pokeapi.co/api/v2/type/{name}'
+pokemonApiBaseUrl: 'https://pokeapi.co'
+pokemonApiSpeciesUrl: '/api/v2/pokemon/{id}'
+pokemonApiMovesUrl: '/api/v2/move/{name}'
+pokemonApiTypesUrl: '/api/v2/type/{name}'
 
 #Icons URLs
 typeIcons:

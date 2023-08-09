@@ -25,14 +25,14 @@ public class DatabaseConnectionMonitor {
     @Scheduled(fixedDelayString = "${batch.databaseConnectionMonitor.fixedDelay}")
     public void checkDatabaseConnection() {
         try (Connection connection = dataSource.getConnection()) {
-            log.info("La connessione al database è attiva.");
+            log.info("Database connection is active");
         } catch (SQLException e) {
             handleDatabaseDisconnection();
         }
     }
 
     public void handleDatabaseDisconnection() {
-        log.error("Connessione al database persa!");
+        log.error("Database connection lost!");
         System.exit(1);
     }
 }

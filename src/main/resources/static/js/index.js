@@ -5,6 +5,7 @@ const pokemonContainer = document.getElementById('pokemon-container');
 let pokemonTeam;
 const tradeButton = document.getElementById('trade-section');
 let exchangedPokemon;
+const origin = window.location.origin;
 
 function hyphenToTitleCase(inputString) {
     const words = inputString.split("-");
@@ -23,8 +24,8 @@ async function fetchRandomTeam() {
         document.body.style.backgroundImage = "url('../images/index/pokedex.jpg')"; // Ripristina lo sfondo predefinito
 
         try {
-            const url = window.location.href;
-            const response = await fetch(url + 'api/pokemon/random-team');
+
+            const response = await fetch(origin + '/api/pokemon/random-team');
             pokemonTeam = await response.json();
             updatePokemonTeamView();
             tradeButton.setAttribute("style", "display: inline-block")
@@ -99,8 +100,7 @@ async function exchangePokemon() {
     const randomizedIndex = getRandomIndexFromPokemonTeam();
     const selectedPokemon = pokemonTeam.at(randomizedIndex);
     const modalError = document.getElementById('errorMessageModal');
-    const url = window.location.href;
-    const response = await fetch(url + 'api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
+    const response = await fetch(origin + '/api/pokemon/exchange/' + selectedPokemon.id, {method: "POST"});
     if (response.ok) {
         exchangedPokemon = await response.json();
         pokemonTeam = pokemonTeam.map((pokemon) =>

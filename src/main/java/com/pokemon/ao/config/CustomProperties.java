@@ -21,6 +21,7 @@ public class CustomProperties {
     private String pokemonDajeStatusExchangeUrl;
     private int maxMovesPerPokemon;
     private int minMovesPerPokemon;
+    private String pokemonApiBaseUrl;
     private String pokemonApiSpeciesUrl;
     private String pokemonApiMovesUrl;
     private String pokemonApiTypesUrl;
@@ -28,8 +29,5 @@ public class CustomProperties {
     private Integer unknownSpeciesID;
     private Integer unknownMoveID;
     private Integer unknownTypeID;
-    private int pokemonExchangeSuccessCode;
-    private int pokemonExchangeInvalidCode;
-    private int pokemonExchangeErrorCode;
     private boolean startWithEmptyPokemonTable;
 }

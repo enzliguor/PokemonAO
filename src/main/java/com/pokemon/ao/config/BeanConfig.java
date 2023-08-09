@@ -29,12 +29,9 @@ public class BeanConfig {
     @Bean
     protected CustomProperties retrieveProperty() {
         CustomProperties customProperties = null;
-        try {
+        try (FileInputStream inputStream = new FileInputStream(customPropertiesPath)) {
             Yaml yaml = new Yaml(new Constructor(CustomProperties.class));
-            FileInputStream inputStream = new FileInputStream(customPropertiesPath);
-
             customProperties = yaml.load(inputStream);
-            inputStream.close();
         } catch (IOException e) {
             log.error("An error occurred while trying to read customProperties.yaml.");
             e.printStackTrace();
